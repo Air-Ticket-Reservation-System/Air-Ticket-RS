@@ -246,18 +246,18 @@ class Flights{
             cout<<"3.Islamabad International Airport\tIslamabad"<<endl;
         }
         void uae(){
-            cout<<"1.Dubai International Airport\tDubai"<<endl;
-            cout<<"2.Sharjah International Airport\tSharjah"<<endl;
-            cout<<"3.Abu Dhabi International Airport\tAbu Dhabi"<<endl;
+            cout<<"1.Dubai International Airport(DIA)\tDubai"<<endl;
+            cout<<"2.Sharjah International Airport(SIA)\tSharjah"<<endl;
+            cout<<"3.Abu Dhabi International Airport(AIA)\tAbu Dhabi"<<endl;
         }
         void saudi_arabia(){
-            cout<<"1.King Khalid International Airport\tRiyadh"<<endl;
-            cout<<"2.King Fahd International Airport\tDammam"<<endl;
-            cout<<"3.King Abdulaziz International Airport\tJeddah"<<endl;
+            cout<<"1.King Khalid International Airport(KIA)\tRiyadh"<<endl;
+            cout<<"2.King Fahd International Airport(FIA)\tDammam"<<endl;
+            cout<<"3.King Abdulaziz International Airport(AIA)\tJeddah"<<endl;
         }
 
         // List of Airport Flights
-        void Allama_Iqbal(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+        void Allama_Iqbal(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -280,9 +280,17 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 95000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 95000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : LHE-SIA-201F"<<endl<<
@@ -290,18 +298,36 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 110000<<endl;
-                    }else{
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
+                    }else if (lower_case_ai=="aia"){
                         cout<<"flight_id : LHE-AIA-101A"<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 85000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 85000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
                     }
                     
                     
@@ -314,9 +340,17 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : LHE-SIA-201F"<<endl<<
@@ -324,18 +358,34 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 150000<<endl;
-                    }else{
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 150000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
+                    }else {
                         cout<<"flight_id : LHE-AIA-301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 90000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 90000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }   
                 }
             }else{
@@ -347,8 +397,15 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 70000<<endl;
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 70000<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : LHE-SIA-201F"<<endl<<
@@ -356,16 +413,30 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else{
                         cout<<"flight_id : LHE-AIA-301R"<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 115000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 115000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }
                 }else if(lower_case=="saudi arabia"){
                     if (lower_case_ai=="kia")
@@ -375,8 +446,15 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 70000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 70000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : LHE-SIA-2701F"<<endl<<
@@ -384,23 +462,37 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 75000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 75000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }else{
                         cout<<"flight_id : LHE-AIA-F301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 80000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 80000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
+
                     }
                 }
                     
             }
             
         }
-        void faisalabad(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+        void faisalabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -423,9 +515,16 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 95000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 95000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : FIA-SIA-2041F"<<endl<<
@@ -433,18 +532,32 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : FIA-AIA-1011A"<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 85000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 85000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }    
                 }else if (lower_case=="saudi arabia")
                 {
@@ -455,9 +568,16 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : FIA-SIA-3201F"<<endl<<
@@ -465,18 +585,32 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 150000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 150000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : FIA-AIA-3301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 90000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 90000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }   
                 }     
             }else{
@@ -488,8 +622,14 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 70000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 70000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : FIA-SIA-201F"<<endl<<
@@ -497,16 +637,28 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 75000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 75000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : FIA-AIA-301R"<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 65000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 65000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                 }
                 else if (lower_case=="saudi arabia")
@@ -518,8 +670,14 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 80000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 80000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : FIA-SIA-2701F"<<endl<<
@@ -527,21 +685,33 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 85000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 85000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : FIA-AIA-F301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 90000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 90000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                 }       
             }      
         }
-        void islamabad(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+        void islamabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -564,9 +734,16 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 95000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 95000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : ISB-SIA-2041F"<<endl<<
@@ -574,18 +751,32 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : ISB-AIA-1011A"<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 85000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 85000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+4"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                     
                     
@@ -598,9 +789,16 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price"<< 110000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price : "<< 110000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : ISB-SIA-3201F"<<endl<<
@@ -608,18 +806,32 @@ class Flights{
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price"<< 150000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price : "<< 150000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : ISB-AIA-3301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price"<< 90000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price : "<< 90000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Return Time : 11:30:00 GMT+3"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                     
                 }
@@ -634,8 +846,14 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 70000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 70000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="sia")
                     {
                        cout<<"flight_id : ISB-SIA-201F"<<endl<<
@@ -643,16 +861,28 @@ class Flights{
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 75000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 75000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : ISB-AIA-301R"<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 65000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 65000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                 }
                 else if (lower_case=="saudi arabia")
@@ -664,8 +894,14 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 80000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 80000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else if (lower_case_ai=="fia")
                     {
                        cout<<"flight_id : ISB-SIA-2701F"<<endl<<
@@ -673,33 +909,147 @@ class Flights{
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 85000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 85000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }else{
                         cout<<"flight_id : ISB-AIA-F301R"<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
-                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price"<< 90000<<endl;
+                        "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price : "<< 90000<<endl<<
+                        "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
+                        "\t\t "<<"20KG\t20000Rs"<<endl<<
+                        "Departure Time : 08:30:00 GMT+5"<<endl<<
+                        "Arrival Time : 10:00:00 GMT+5"<<endl<<
+                        "Refund : Available"<<endl<<
+                        "Upgrade : Available"<<endl;
                     }
                 }   
             }
         }
 };
 
+// Flight Searching
+struct Date
+{
+    int date,month,year;
+};
 
+class Search_flight:public Flights{
+    protected:
+        int dept_airport;
+        string arrival_airport;
+        string arrival_country;
+        bool flight_type_return;
+        Date d;
+    public:
+        string toLower(string s) {
+        for (auto &c : s) c = tolower(c);
+        return s;
+        }
+        void input_flight_search_details(){
+            cout<<"\nThese Airports are available:\n";
+            Flights::pakistan_airports();
+            cout<<"\n";
+            do
+            {
+                cout<<"Select Departure Airport(1,2,3) = ";
+                cin>>dept_airport;
+                cin.ignore();
+                if (dept_airport==1 || dept_airport==2 || dept_airport==3)
+                {
+                    break;
+                }else{
+                    cout<<"You Entered Wrong Details!"<<endl;
+                }
+                
+            } while (true);
+
+            bool check=false;
+            do
+            {
+                string temp_country;
+                cout<<"Enter Arrival Country (UAE,Saudi Arabia)= ";
+                getline(cin,arrival_country);
+                temp_country=toLower(arrival_country);
+                
+                if (temp_country=="uae")
+                {
+                    cout<<"\nThese Airports are available:\n";
+                    Flights::uae();
+                    check=true;
+                }else if (temp_country=="saudi arabia")
+                {
+                    cout<<"\nThese Airports are available:\n";
+                    Flights::saudi_arabia();
+                    check=true;
+                }else{
+                    cout<<endl<<"You Entered Wrong Details!"<<endl;
+                }
+            } while (!check);
+            cout<<"\nEnter Arrival Airport(XYZ) = ";
+            string temp_airport;
+            getline(cin,temp_airport);
+            arrival_airport=toLower(temp_airport);
+            int choice;
+            do
+            {
+                cout<<"\nSelect Flight Type:\n1.OneWay\n2.Return"<<endl;
+                cin>>choice;
+                cin.ignore();
+                if (choice==1)
+                {
+                    flight_type_return=false;
+                    break;
+                }else if (choice==2)
+                {
+                    flight_type_return=true;
+                    break;
+                }else{
+                    cout<<endl<<"You Entered Wrong Details!"<<endl;
+                }
+            } while (true);
+            cout<<"Enter Departure Date (x/y/z) = ";
+            char ch;
+            cin>>d.date>>ch>>d.month>>ch>>d.year;
+        }
+        void show_flights(){
+            if (dept_airport==1)
+            {
+                Flights::Allama_Iqbal(d.date,d.month,d.year,arrival_country,
+                arrival_airport,flight_type_return);
+            }else if (dept_airport==2)
+            {
+                Flights::faisalabad(d.date,d.month,d.year,arrival_country,
+                arrival_airport,flight_type_return);
+            }else{
+                Flights::islamabad(d.date,d.month,d.year,arrival_country,
+                arrival_airport,flight_type_return);
+            }
+        }
+};
 
 int main()
 {
-    User_authentication u1,u2;
-    u1.signup();
-    // u1.login();
-    // u1.check_details();
-    u1.edit_details();
-    // u2.signup();
-    // u2.login();
+    // User_authentication u1,u2;
+    // u1.signup();
+    // // u1.login();
+    // // u1.check_details();
+    // u1.edit_details();
+    // // u2.signup();
+    // // u2.login();
+    Search_flight s1;
+    s1.input_flight_search_details();
+    cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+    s1.show_flights();
    
     
 
