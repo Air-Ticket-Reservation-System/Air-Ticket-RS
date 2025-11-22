@@ -235,6 +235,462 @@ class User_authentication{
         }
 };
 vector<User_authentication> User_authentication::user;
+
+// Flights And Airport Data Class
+
+class Flights{
+    protected:
+        void pakistan_airports(){
+            cout<<"1.Allama Iqbal International Airport\tLahore"<<endl;
+            cout<<"2.Faisalabad International Airport\tFaisalabad"<<endl;
+            cout<<"3.Islamabad International Airport\tIslamabad"<<endl;
+        }
+        void uae(){
+            cout<<"1.Dubai International Airport\tDubai"<<endl;
+            cout<<"2.Sharjah International Airport\tSharjah"<<endl;
+            cout<<"3.Abu Dhabi International Airport\tAbu Dhabi"<<endl;
+        }
+        void saudi_arabia(){
+            cout<<"1.King Khalid International Airport\tRiyadh"<<endl;
+            cout<<"2.King Fahd International Airport\tDammam"<<endl;
+            cout<<"3.King Abdulaziz International Airport\tJeddah"<<endl;
+        }
+
+        // List of Airport Flights
+        void Allama_Iqbal(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+            string lower_case;
+            string lower_case_ai;
+                // for converting into lower case
+                for (size_t i = 0; i < country.size(); i++)
+                {
+                    lower_case.push_back(tolower(country[i]));
+                }
+                for (size_t i = 0; i < arrival_airport.size(); i++)
+                {
+                    lower_case_ai.push_back(tolower(arrival_airport[i]));
+                }
+            if (return_type)
+            {
+                if (lower_case=="uae")
+                {
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : LHE-DXB-301R"<<endl<<
+                        "flight_name : PIA Gulf1"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 95000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        "flight_name : PIA Gulf2"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 110000<<endl;
+                    }else{
+                        cout<<"flight_id : LHE-AIA-101A"<<endl<<
+                        "flight_name : PIA Gulf3"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 85000<<endl;
+                    }
+                    
+                    
+                }else if (lower_case=="saudi arabia")
+                {
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : LHE-KIA-409F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 110000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 150000<<endl;
+                    }else{
+                        cout<<"flight_id : LHE-AIA-301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 90000<<endl;
+                    }   
+                }
+            }else{
+                if (lower_case=="uae"){
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : LHE-DXB-301R"<<endl<<
+                        "flight_name : PIA Express"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 70000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        "flight_name : AirBlue Sky"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 110000<<endl;
+                    }else{
+                        cout<<"flight_id : LHE-AIA-301R"<<endl<<
+                        "flight_name : New PIA"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 115000<<endl;
+                    }
+                }else if(lower_case=="saudi arabia"){
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : LHE-KIA-1209F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 70000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : LHE-SIA-2701F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 75000<<endl;
+                    }else{
+                        cout<<"flight_id : LHE-AIA-F301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Lahore"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 80000<<endl;
+                    }
+                }
+                    
+            }
+            
+        }
+        void faisalabad(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+            string lower_case;
+            string lower_case_ai;
+                // for converting into lower case
+                for (size_t i = 0; i < country.size(); i++)
+                {
+                    lower_case.push_back(tolower(country[i]));
+                }
+                for (size_t i = 0; i < arrival_airport.size(); i++)
+                {
+                    lower_case_ai.push_back(tolower(arrival_airport[i]));
+                }
+            if (return_type)
+            {
+                if (lower_case=="uae")
+                {
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : FIA-DXB-3501R"<<endl<<
+                        "flight_name : PIA Gulf1"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 95000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : FIA-SIA-2041F"<<endl<<
+                        "flight_name : PIA Gulf2"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 110000<<endl;
+                    }else{
+                        cout<<"flight_id : FIA-AIA-1011A"<<endl<<
+                        "flight_name : PIA Gulf3"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 85000<<endl;
+                    }    
+                }else if (lower_case=="saudi arabia")
+                {
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : FIA-KIA-2409F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 110000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : FIA-SIA-3201F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 150000<<endl;
+                    }else{
+                        cout<<"flight_id : FIA-AIA-3301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 90000<<endl;
+                    }   
+                }     
+            }else{
+                if (lower_case=="uae"){
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : FIA-DXB-6301R"<<endl<<
+                        "flight_name : PIA Express"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 70000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : FIA-SIA-201F"<<endl<<
+                        "flight_name : AirBlue Sky"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 75000<<endl;
+                    }else{
+                        cout<<"flight_id : FIA-AIA-301R"<<endl<<
+                        "flight_name : New PIA"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 65000<<endl;
+                    }
+                }
+                else if (lower_case=="saudi arabia")
+                {
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : FIA-KIA-1209F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 80000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : FIA-SIA-2701F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 85000<<endl;
+                    }else{
+                        cout<<"flight_id : FIA-AIA-F301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Faisalabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 90000<<endl;
+                    }
+                }       
+            }      
+        }
+        void islamabad(int d,int m,int y,string country,bool return_type=false,string arrival_airport){
+            string lower_case;
+            string lower_case_ai;
+                // for converting into lower case
+                for (size_t i = 0; i < country.size(); i++)
+                {
+                    lower_case.push_back(tolower(country[i]));
+                }
+                for (size_t i = 0; i < arrival_airport.size(); i++)
+                {
+                    lower_case_ai.push_back(tolower(arrival_airport[i]));
+                }
+            if (return_type)
+            {
+                if (lower_case=="uae")
+                {
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : ISB-DXB-3501R"<<endl<<
+                        "flight_name : PIA Gulf1"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 95000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : ISB-SIA-2041F"<<endl<<
+                        "flight_name : PIA Gulf2"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 110000<<endl;
+                    }else{
+                        cout<<"flight_id : ISB-AIA-1011A"<<endl<<
+                        "flight_name : PIA Gulf3"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 85000<<endl;
+                    }
+                    
+                    
+                }else if (lower_case=="saudi arabia")
+                {
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : ISB-KIA-2409F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
+                        "price"<< 110000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : ISB-SIA-3201F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
+                        "price"<< 150000<<endl;
+                    }else{
+                        cout<<"flight_id : ISB-AIA-3301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : Return"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "return_date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
+                        "price"<< 90000<<endl;
+                    }
+                    
+                }
+                
+                
+            }else{
+                if (lower_case=="uae"){
+                    if (lower_case_ai=="dia")
+                    {
+                        cout<<"flight_id : ISB-DXB-6301R"<<endl<<
+                        "flight_name : PIA Express"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 70000<<endl;
+                    }else if (lower_case_ai=="sia")
+                    {
+                       cout<<"flight_id : ISB-SIA-201F"<<endl<<
+                        "flight_name : AirBlue Sky"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 75000<<endl;
+                    }else{
+                        cout<<"flight_id : ISB-AIA-301R"<<endl<<
+                        "flight_name : New PIA"<<endl<<
+                        "type : One-Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Dubai"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 65000<<endl;
+                    }
+                }
+                else if (lower_case=="saudi arabia")
+                {
+                    if (lower_case_ai=="kia")
+                    {
+                        cout<<"flight_id : ISB-KIA-1209F"<<endl<<
+                        "flight_name : PIA Gulf11"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 80000<<endl;
+                    }else if (lower_case_ai=="fia")
+                    {
+                       cout<<"flight_id : ISB-SIA-2701F"<<endl<<
+                        "flight_name : PIA Gulf12"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 85000<<endl;
+                    }else{
+                        cout<<"flight_id : ISB-AIA-F301R"<<endl<<
+                        "flight_name : PIA Gulf13"<<endl<<
+                        "type : One Way"<<endl<<
+                        "from : Islamabad"<<endl<<
+                        "to : Saudi Arabia"<<endl<<
+                        "date"<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
+                        "price"<< 90000<<endl;
+                    }
+                }   
+            }
+        }
+};
+
+
+
 int main()
 {
     User_authentication u1,u2;
