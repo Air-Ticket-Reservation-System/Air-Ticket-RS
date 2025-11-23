@@ -1073,17 +1073,11 @@ class Seat_management{
         int seat_no;
         public:
         static int seats[50];
-        Seat_management(){
-            for (size_t i = 0; i < 50; i++)
-            {
-                seats[i]=0;
-            }
-        }
         static void show_economy_free_seats(){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 0; i < 30; i++)
             {
-                if(seats[i]!=0){
+                if(seats[i]==0){
                     cout<<i+1<<"\t";
                 }
             }
@@ -1093,8 +1087,8 @@ class Seat_management{
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 30; i < 40; i++)
             {
-                if(seats[i]!=0){
-                    cout<<i<<"\t";
+                if(seats[i]==0){
+                    cout<<i+1<<"\t";
                 }
             }
             cout<<endl;
@@ -1103,26 +1097,37 @@ class Seat_management{
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 40; i < 50; i++)
             {
-                if(seats[i]!=0){
-                    cout<<i<<"\t";
+                if(seats[i]==0){
+                    cout<<i+1<<"\t";
                 }
             }
             cout<<endl;
         }
-        void book_seat(){
+        void book_seat(int n){
             do
             {
+                int start,end;
+                if(n==1){start=1,end=30;}
+                else if(n==2){start=31,end=40;}
+                else if(n==3){start=41,end=50;}
                 cout<<"Enter seat number you want to book = ";
-                cin>>seat_no;
-                if (seat_no>0 &&seats[seat_no-1]==0)
+                int seat_choice;
+                cin>>seat_choice;
+                if (seat_choice<start || seat_choice>end)
                 {
-                   seats[seat_no-1]=1; // 1 for seat booked
-                   cout<<endl<<"Seat selected successfully!"<<endl;
-                   break;
+                    cout<<"Invalid seat number for this class!"<<endl;
                 }else{
-                    cout<<endl<<"Seat already Booked!"<<endl;
-                }
                 
+                    if (seats[seat_choice-1]==0)
+                    {
+                    seats[seat_choice-1]=1; // 1 for seat booked
+                    seat_no=seat_choice;
+                    cout<<endl<<"Seat selected successfully!"<<endl;
+                    break;
+                    }else{
+                        cout<<endl<<"Seat already Booked!"<<endl;
+                    }
+                }
             } while (true);
         }
          void cancel_seat(){
@@ -1132,28 +1137,35 @@ class Seat_management{
                 cout<<"Enter your seat number = ";
                 cin>>temp_seat;
                 cin.ignore();
-
-                if (temp_seat==this->seat_no && seats[seat_no-1]==1)
-                {
-                   seats[seat_no-1]=0; // 1 for seat booked
-                   cout<<endl<<"Seat Cancelled successfully!"<<endl;
-                   break;
-                }else{
-                    if (seat_no==0 ||seat_no<0)
+                if (temp_seat==0 ||temp_seat<0 || temp_seat>50)
                     {
                         cout<<endl<<"Please Sealect a valid seat!"<<endl;
-                    }else if(temp_seat!=this->seat_no){
-                        cout<<endl<<"This is not your Seat!"<<endl;
-                    }else if (seats[seat_no-1]==0)
+                        continue;
+                    }
+                if (seats[temp_seat-1]==0)
                     {
                         // To avoid double cancellation
                         cout<<endl<<"Seat is already Freed!"<<endl;
+                        continue;
                     }
-                    
-                }
+                if (temp_seat!=seat_no)
+                    {
+                        cout<<endl<<"This is not your seat!"<<endl;
+                        continue;
+                    }
+               
+                   seats[temp_seat-1]=0; // 1 for seat booked
+                   seat_no=0;
+                   cout<<endl<<"Seat Cancelled successfully!"<<endl;
+                   break;
+                
             } while (true);
         }
 };
+
+int Seat_management::seats[50]={0};
+
+
 
 // Booking Class
 
@@ -1162,12 +1174,35 @@ class Booking:public User_authentication{
         int no_of_passengers; //5 passenger allowed at one time
         int adult,infant,child;
         string flight_class;
-        Seat_management s;
         float fare;
+        vector<Person> person_vector;
+        vector<Seat_management> seat_vector;
     public:
         static vector<Booking> book;
+        void fare_calculation(string c,float weight){
+            do
+            {
+                if (weight>=0 && weight<=20)
+                {
+                    if (c=="uae")
+                    {
+                        fare=UAE_PRICE+(weight*1000);
+                        cout<<"Your Total Bill is = "<<fare<<endl;
+                        break;
+                    }else{
+                        fare=SA_PRICE+(weight*1000);
+                        cout<<"Your Total Bill is = "<<fare<<endl;
+                        break;
+                    }
+                    
+                }else{
+                    cout<<"Enter a valid weight = ";
+                    cin>>weight;
+                }
+                
+            } while (true);  
+        }
         void start_Booking(){
-            int sum=0;
             cout<<"Login if you have an account.\nSignUp if you are new user\n"<<endl;
             int choice;
             bool checking_account=false;
@@ -1203,9 +1238,9 @@ class Booking:public User_authentication{
                 cin.ignore();
                 if (no_of_passengers>0 &&no_of_passengers<=5)
                 {
-                        Person *ptr=new Person[no_of_passengers];
                     do
                     {
+                        int sum=0;
                         cout<<"How many Adults = ";
                         cin>>adult;
                         cin.ignore();
@@ -1225,7 +1260,6 @@ class Booking:public User_authentication{
                                     sum+=child;
                                 }else{
                                     cout<<"Child cant travel without An Adult!"<<endl;
-                                    sum=0;
                                     continue;
                                 } 
                         }else{
@@ -1235,13 +1269,13 @@ class Booking:public User_authentication{
                         cout<<"How many infants = ";
                         cin>>infant;
                         cin.ignore();
-                        if(sum+infant<=5){
+                        if(sum+infant<=no_of_passengers){
                                 if (adult>0)
                                 {
                                     sum+=infant;
+                                    break;
                                 }else{
                                     cout<<"Infants cant travel without An Adult!"<<endl;
-                                    sum=0;
                                     continue;
                                 } 
                         }else{
@@ -1252,33 +1286,57 @@ class Booking:public User_authentication{
                     for (size_t i = 0; i < no_of_passengers; i++)
                     {
                         cout<<"Enter Passenger "<<i+1<<"details:\n"<<endl;
-                        ptr[i].person_input();
-                        cout<<"Enter Class You want to Book:\n1.Economy\n"
-                        "2.Business\n3.First Class"<<endl;
-                        int class_choice;
-                        cin>>class_choice;
-                        cin.ignore();
-                        if (class_choice==1)
+                        Person p;
+                        p.person_input();
+                        person_vector.push_back(p);
+                        do
                         {
-                            
-                        }
-                        
-
+                            cout<<"Enter Class You want to Book:\n1.Economy\n"
+                            "2.Business\n3.First Class"<<endl;
+                            int class_choice;
+                            cin>>class_choice;
+                            cin.ignore();
+                            if (class_choice<0 || class_choice>3)
+                            {
+                                cout<<"Please enter a Valid number!\n"<<endl;
+                                continue;
+                            } 
+                            else if (class_choice==1)
+                                {
+                                    cout<<"Select Seat From selected class!\n"<<endl;
+                                    Seat_management s;
+                                    s.show_economy_free_seats();
+                                    s.book_seat(class_choice);
+                                    seat_vector.push_back(s);
+                                    break;
+                                }
+                            else if(class_choice==2)
+                                {
+                                    cout<<"Select Seat From selected class!\n"<<endl;
+                                    Seat_management s;
+                                    s.show_buisness_free_seats();
+                                    s.book_seat(class_choice);
+                                    seat_vector.push_back(s);
+                                    break;
+                                }
+                            else
+                                {
+                                    cout<<"Select Seat From selected class!\n"<<endl;
+                                    Seat_management s;
+                                    s.show_first_free_seats();
+                                    s.book_seat(class_choice);
+                                    seat_vector.push_back(s);
+                                    break;
+                                }
+                        } while (true);
+                        //Free Memory
                     }
                 }else{
                     cout<<"PLease give valid input!"<<endl;
                 }
                } while (true);
-
-               
-               
             }
         }
-
-
-
-
-
 };
 
 
