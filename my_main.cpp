@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <map>
 #define UAE_PRICE 100000
 #define SA_PRICE 150000
 using namespace std;
@@ -985,6 +986,9 @@ class Search_flight:public Flights{
         for (auto &c : s) c = tolower(c);
         return s;
         }
+        string return_arrival_Country(){
+            return toLower(arrival_country);
+        }
         void input_flight_search_details(){
             cout<<"\nThese Airports are available:\n";
             Flights::pakistan_airports();
@@ -1050,6 +1054,7 @@ class Search_flight:public Flights{
             cout<<"Enter Departure Date (x/y/z) = ";
             char ch;
             cin>>d.date>>ch>>d.month>>ch>>d.year;
+            cin.ignore();
         }
         void show_flights(){
             if (dept_airport==1)
@@ -1175,11 +1180,11 @@ class Booking:public User_authentication{
         int adult,infant,child;
         string flight_class;
         float fare;
+        float baggae;
         vector<Person> person_vector;
         vector<Seat_management> seat_vector;
     public:
-        static vector<Booking> book;
-        void fare_calculation(string c,float weight){
+        float fare_calculation(string c,float weight){
             do
             {
                 if (weight>=0 && weight<=20)
@@ -1187,12 +1192,10 @@ class Booking:public User_authentication{
                     if (c=="uae")
                     {
                         fare=UAE_PRICE+(weight*1000);
-                        cout<<"Your Total Bill is = "<<fare<<endl;
-                        break;
+                        return fare;
                     }else{
                         fare=SA_PRICE+(weight*1000);
-                        cout<<"Your Total Bill is = "<<fare<<endl;
-                        break;
+                        return fare;
                     }
                     
                 }else{
@@ -1329,7 +1332,22 @@ class Booking:public User_authentication{
                                     break;
                                 }
                         } while (true);
-                        //Free Memory
+                        do
+                        {
+                            cout<<"Enter weight of your Baggage = ";
+                            float temp_weight;
+                            cin>>temp_weight;
+                            cin.ignore();
+                            if(temp_weight>=0 && temp_weight<=20){
+                                baggae=temp_weight;
+                                break;
+                            }else{
+                                cout<<"Weight shold be less than 20KG!\n"<<endl;
+                            }
+                        } while (true); //weight loop
+                        
+                        
+
                     }
                 }else{
                     cout<<"PLease give valid input!"<<endl;
@@ -1339,6 +1357,160 @@ class Booking:public User_authentication{
         }
 };
 
+// Payment class 
+
+
+class Payment:public Booking{
+    protected:
+        float pay_money;
+        map <string,int> rates;
+        Search_flight s;
+        public:
+        static vector<Payment> pay;
+        Payment(){
+            rates["USD"] = 285.0;   // US Dollar
+            rates["EUR"] = 310.0;   // Euro
+            rates["Pound"] = 360.0;   // British Pound
+            rates["Yen"] = 2.0;     // Japanese Yen
+            rates["AUD"] = 190.0;   // Australian Dollar
+        }
+        float currency_convertor(float money,int n){
+            switch (n)
+            {
+            case 1:
+                return rates["USD"]*money;
+            case 2:
+                return rates["EUR"]*money;
+            case 3:
+                return rates["Pound"]*money;
+            case 4:
+                return rates["Yen"]*money;
+            case 5:
+                return rates["AUD"]*money;
+            default:
+                cout<<"Invalid input"<<endl;
+                return 0.0f;
+            }
+        }
+        void payment_process(){
+            s.input_flight_search_details();
+            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+            s.show_flights();
+            do
+            {
+                cout<<"\nDo you want to book this flight\n1.Yes\n2.No\n"<<endl;
+                int dec;
+                cin>>dec;
+                cin.ignore();
+                if (dec==1)
+                {
+                    Booking::start_Booking();
+                    float bill=Booking::fare_calculation(s.return_arrival_Country(),baggae);
+                    cout<<"Your Total Bill is = "<<bill<<endl<<endl;
+                    cout<<"Here is the list of Available Payment Currencies\n"<<endl;
+                    int i=1;
+                    for (auto &c:rates){
+                        cout<<i<<". "<<c.first<<" : "<<c.second<<endl;
+                    }
+                    cout<<"Enter currency choice = ";
+                    int choice;
+                    cin>>choice;
+                    cin.ignore();
+                    cout<<"Here is the list of Available Payment methods"<<endl<<
+                    "Select one of them\n1.Debit card\n2.Credit card\n3.Online banking\n"<<
+                    endl;
+                    do
+                    {
+                        cout<<"Enter Payment method = ";
+                        int pay_m;
+                        cin>>pay_m;
+                        cin.ignore();
+                        float temp_money;
+                        if(pay_m==1 || pay_m==2){// same method for both
+                            debit_card();
+                            cout<<"Enter amount of transaction = ";
+                            cin>>temp_money;
+                            cin.ignore();
+                            pay_money=currency_convertor(temp_money,choice);
+                            if (pay_money>=bill)
+                            {
+                                if (pay_money>bill)
+                                {
+                                    float remain=pay_money-bill;
+                                    cout<<"We will send back your remaining amount soon = "<<remain<<endl;
+                                }
+                                cout<<"Flight Booked Successfully"<<endl;
+                                pay.push_back(*this);
+                                break;
+                            }else{
+                                cout<<"Payment Insufficient"<<endl;
+                            }
+                            
+                        }else if (pay_m==3)
+                        {
+                            bank_account();
+                            cout<<"Enter amount of transaction = ";
+                            cin>>temp_money;
+                            cin.ignore();
+                            pay_money=currency_convertor(temp_money,choice);
+                            if (pay_money>=bill)
+                            {
+                                if (pay_money>bill)
+                                {
+                                    float remain=pay_money-bill;
+                                    cout<<"We will send back your remaining amount soon = "<<remain<<endl;
+                                }
+                                cout<<"Flight Booked Successfully"<<endl;
+                                pay.push_back(*this);
+                                break;
+                            }else{
+                                cout<<"Payment Insufficient"<<endl;
+                            }
+                        }else{
+                            cout<<"\nInvalid Choice!\n"<<endl;
+                        }
+                    } while (true);
+                    break;
+                }else if(dec == 2){
+                    cout<<"OK No Problem Thanks for visiting!\n"<<endl;
+                    break;
+                }else{
+                    cout<<"Invalid Choice!\n"<<endl;
+                }
+                } while (true);   
+        }
+        void debit_card(){
+            string name;
+            long long card_number;
+            Date d2;
+            int ccv;
+            cout<<"Enter your Name = ";
+            getline(cin,name);
+            cout<<"Enter 16-Digit Card Number = ";
+            cin>>card_number;
+            cin.ignore();
+            cout<<"Enter Expiry Date (x/y/z) = ";
+            char ch;
+            cin>>d2.date>>ch>>d2.month>>ch>>d2.year;
+            cout<<"Enter 3-Digit CCV Number = ";
+            cin>>ccv;
+            cin.ignore();
+        }
+        void bank_account(){
+            string bank_name,password;
+            long long account_no,rec_no;
+            cout<<"Enter your Bank Name = ";
+            getline(cin,bank_name);
+            cout<<"Enter your account number = ";
+            cin>>account_no;
+            cin.ignore();
+            cout<<"Enter Reciever account number = ";;
+            cin>>rec_no;
+            cin.ignore();
+            cout<<"Enter Your Password = ";
+            getline(cin,password);
+        }
+};
 
 
 
