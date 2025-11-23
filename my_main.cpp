@@ -2,12 +2,40 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#define UAE_PRICE 100000
+#define SA_PRICE 150000
 using namespace std;
-class User_authentication{
+class Person{
     protected:
         string first_name;
         string last_name;
-        long long int phone_number;
+        long long int phone_number,passport,cnic;
+    public:
+        void person_input(){
+            cout<<"Enter First name = ";
+            getline(cin,first_name);
+            cout<<"Enter Last name = ";
+            getline(cin,last_name);
+            cout<<"Enter CNIC = ";
+            cin>>cnic;
+            cin.ignore();
+            cout<<"Enter Passport = ";
+            cin>>passport;
+            cin.ignore();
+            cout<<"Enter Phone Number = ";
+            cin>>phone_number;
+            cin.ignore();
+        }
+        void show(){
+            cout<<"First name = "<<first_name<<endl;
+            cout<<"Last name = "<<last_name<<endl;
+            cout<<"CNIC = "<<cnic<<endl;
+            cout<<"Passport = "<<passport<<endl;
+            cout<<"Phone Number = "<<phone_number<<endl;
+        }
+};
+class User_authentication:public Person{
+    protected:
         string email;
         string password;
     public:
@@ -82,7 +110,7 @@ class User_authentication{
             check_signup=true;
             user.push_back(*this);
         }
-        void login(){
+        int login(){
             string temp_mail,temp_password;
             cout<<"Enter your email = ";
             getline(cin,temp_mail);
@@ -97,17 +125,19 @@ class User_authentication{
                         {
                             cout<<"Login successful"<<endl;
                             find=true;
-                            break;
+                            return 0;
                         }
                 }
                 if (!find)
                 {
                    cout<<"Email or password does not match with user credentials!"<<endl;
+                   return -1;
                 }
                 
             }else
                 {
                     cout<<"Please sign up first!"<<endl;
+                    return 1;
                 }
             }
         void check_details(){
@@ -282,7 +312,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 95000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -300,7 +330,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -317,7 +347,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 85000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -342,7 +372,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -360,7 +390,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 150000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -377,7 +407,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 90000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -400,7 +430,7 @@ class Flights{
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 70000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
@@ -414,7 +444,7 @@ class Flights{
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -429,7 +459,7 @@ class Flights{
                         "from : Lahore"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 115000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -447,7 +477,7 @@ class Flights{
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 70000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -463,7 +493,7 @@ class Flights{
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 75000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -478,7 +508,7 @@ class Flights{
                         "from : Lahore"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 80000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -517,7 +547,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 95000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -534,7 +564,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -550,7 +580,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 85000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -570,7 +600,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -587,7 +617,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 150000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -603,7 +633,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 90000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -623,7 +653,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 70000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -638,7 +668,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 75000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -652,7 +682,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 65000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -671,7 +701,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 80000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -686,7 +716,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 85000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -700,7 +730,7 @@ class Flights{
                         "from : Faisalabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 90000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -736,7 +766,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 95000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -753,7 +783,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -769,7 +799,7 @@ class Flights{
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 85000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -791,7 +821,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+2<10?"0":"")<<d+2<<endl<<
-                        "price : "<< 110000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -808,7 +838,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+1<10?"0":"")<<d+1<<endl<<
-                        "price : "<< 150000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -824,7 +854,7 @@ class Flights{
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
                         "Return Date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d+3<10?"0":"")<<d+3<<endl<<
-                        "price : "<< 90000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -847,7 +877,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 70000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -862,7 +892,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 75000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -876,7 +906,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Dubai"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 65000<<endl<<
+                        "price : "<< UAE_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -895,7 +925,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 80000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -910,7 +940,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 85000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -924,7 +954,7 @@ class Flights{
                         "from : Islamabad"<<endl<<
                         "to : Saudi Arabia"<<endl<<
                         "date : "<<y<<"-"<<(m<10?"0":"")<<m<<"-"<<(d<10?"0":"")<<d<<endl<<
-                        "price : "<< 90000<<endl<<
+                        "price : "<< SA_PRICE<<endl<<
                         "Bagage Allownce: "<<"10KG\t10000Rs"<<endl<<
                         "\t\t "<<"20KG\t20000Rs"<<endl<<
                         "Departure Time : 08:30:00 GMT+5"<<endl<<
@@ -1036,6 +1066,223 @@ class Search_flight:public Flights{
             }
         }
 };
+
+// Seat Management Class
+class Seat_management{
+    protected:
+        int seat_no;
+        public:
+        static int seats[50];
+        Seat_management(){
+            for (size_t i = 0; i < 50; i++)
+            {
+                seats[i]=0;
+            }
+        }
+        static void show_economy_free_seats(){
+            cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
+            for (size_t i = 0; i < 30; i++)
+            {
+                if(seats[i]!=0){
+                    cout<<i+1<<"\t";
+                }
+            }
+            cout<<endl;
+        }
+        static void show_buisness_free_seats(){
+            cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
+            for (size_t i = 30; i < 40; i++)
+            {
+                if(seats[i]!=0){
+                    cout<<i<<"\t";
+                }
+            }
+            cout<<endl;
+        }
+        static void show_first_free_seats(){
+            cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
+            for (size_t i = 40; i < 50; i++)
+            {
+                if(seats[i]!=0){
+                    cout<<i<<"\t";
+                }
+            }
+            cout<<endl;
+        }
+        void book_seat(){
+            do
+            {
+                cout<<"Enter seat number you want to book = ";
+                cin>>seat_no;
+                if (seat_no>0 &&seats[seat_no-1]==0)
+                {
+                   seats[seat_no-1]=1; // 1 for seat booked
+                   cout<<endl<<"Seat selected successfully!"<<endl;
+                   break;
+                }else{
+                    cout<<endl<<"Seat already Booked!"<<endl;
+                }
+                
+            } while (true);
+        }
+         void cancel_seat(){
+            int temp_seat;
+            do
+            {
+                cout<<"Enter your seat number = ";
+                cin>>temp_seat;
+                cin.ignore();
+
+                if (temp_seat==this->seat_no && seats[seat_no-1]==1)
+                {
+                   seats[seat_no-1]=0; // 1 for seat booked
+                   cout<<endl<<"Seat Cancelled successfully!"<<endl;
+                   break;
+                }else{
+                    if (seat_no==0 ||seat_no<0)
+                    {
+                        cout<<endl<<"Please Sealect a valid seat!"<<endl;
+                    }else if(temp_seat!=this->seat_no){
+                        cout<<endl<<"This is not your Seat!"<<endl;
+                    }else if (seats[seat_no-1]==0)
+                    {
+                        // To avoid double cancellation
+                        cout<<endl<<"Seat is already Freed!"<<endl;
+                    }
+                    
+                }
+            } while (true);
+        }
+};
+
+// Booking Class
+
+class Booking:public User_authentication{
+    protected:
+        int no_of_passengers; //5 passenger allowed at one time
+        int adult,infant,child;
+        string flight_class;
+        Seat_management s;
+        float fare;
+    public:
+        static vector<Booking> book;
+        void start_Booking(){
+            int sum=0;
+            cout<<"Login if you have an account.\nSignUp if you are new user\n"<<endl;
+            int choice;
+            bool checking_account=false;
+            do
+            {
+                cout<<"Select one option Below\n1.Login\n2.SignUP\n"<<endl;
+                cin>>choice;
+                cin.ignore();
+                if (choice==1)
+                {
+                    int n=User_authentication::login();
+                    if (n==0)
+                    {
+                        checking_account=true;
+                        break;
+                    }  
+                }else if (choice==2)
+                {
+                    User_authentication::signup();
+                    checking_account=true;
+                    break;
+                }else{
+                    cout<<"Please give a valid input"<<endl;
+                }
+            } while (true);
+            if (checking_account)
+            {
+               cout<<"Fill Details Below:\n"<<endl;
+               do
+               {
+                cout<<"Enter number of Passengers (at one time maximum limit 5) = ";
+                cin>>no_of_passengers;
+                cin.ignore();
+                if (no_of_passengers>0 &&no_of_passengers<=5)
+                {
+                        Person *ptr=new Person[no_of_passengers];
+                    do
+                    {
+                        cout<<"How many Adults = ";
+                        cin>>adult;
+                        cin.ignore();
+                        if (sum+adult<=no_of_passengers)
+                        {
+                            sum+=adult;
+                        }else{
+                            cout<<"Your selected number of passeger limit reached!\n"<<endl;
+                            continue;
+                        }
+                        cout<<"How many childs = ";
+                        cin>>child;
+                        cin.ignore();
+                        if(sum+child<=no_of_passengers){
+                                if (adult>0)
+                                {
+                                    sum+=child;
+                                }else{
+                                    cout<<"Child cant travel without An Adult!"<<endl;
+                                    sum=0;
+                                    continue;
+                                } 
+                        }else{
+                            cout<<"Maximum Limit Reached!"<<endl;
+                            break;
+                        }
+                        cout<<"How many infants = ";
+                        cin>>infant;
+                        cin.ignore();
+                        if(sum+infant<=5){
+                                if (adult>0)
+                                {
+                                    sum+=infant;
+                                }else{
+                                    cout<<"Infants cant travel without An Adult!"<<endl;
+                                    sum=0;
+                                    continue;
+                                } 
+                        }else{
+                            cout<<"Maximum Limit Reached!"<<endl;
+                            break;
+                        }
+                    } while (true);
+                    for (size_t i = 0; i < no_of_passengers; i++)
+                    {
+                        cout<<"Enter Passenger "<<i+1<<"details:\n"<<endl;
+                        ptr[i].person_input();
+                        cout<<"Enter Class You want to Book:\n1.Economy\n"
+                        "2.Business\n3.First Class"<<endl;
+                        int class_choice;
+                        cin>>class_choice;
+                        cin.ignore();
+                        if (class_choice==1)
+                        {
+                            
+                        }
+                        
+
+                    }
+                }else{
+                    cout<<"PLease give valid input!"<<endl;
+                }
+               } while (true);
+
+               
+               
+            }
+        }
+
+
+
+
+
+};
+
+
+
 
 int main()
 {
