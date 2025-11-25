@@ -111,14 +111,12 @@ class User_authentication:public Person{
             check_signup=true;
             user.push_back(*this);
         }
-        int login(){
+        static int login(){
             string temp_mail,temp_password;
             cout<<"Enter your email = ";
             getline(cin,temp_mail);
             cout<<"Enter your Password = ";
             getline(cin,temp_password);
-            if (check_signup)
-            {
                 bool find=false;
                 for (auto &u:user)
                 {
@@ -134,21 +132,13 @@ class User_authentication:public Person{
                    cout<<"Email or password does not match with user credentials!"<<endl;
                    return -1;
                 }
-                
-            }else
-                {
-                    cout<<"Please sign up first!"<<endl;
-                    return 1;
-                }
             }
-        void check_details(){
+        static void check_details(){
             string temp_mail,temp_password;
             cout<<"Enter your email = ";
             getline(cin,temp_mail);
             cout<<"Enter your Password = ";
             getline(cin,temp_password);
-            if (check_signup)
-            {
                 bool find=false;
                 for (auto &u:user)
                 {
@@ -168,9 +158,6 @@ class User_authentication:public Person{
                 {
                    cout<<"Email or password does not match with user credentials!"<<endl;
                 }
-            }else{
-                cout<<"You do not have any account yet!"<<endl;
-            }
         }
         void edit_details(){
             string temp_mail,temp_password;
@@ -1166,6 +1153,9 @@ class Seat_management{
                 
             } while (true);
         }
+        int return_seat_no(){
+            return seat_no;
+        }
 };
 
 int Seat_management::seats[50]={0};
@@ -1174,15 +1164,15 @@ int Seat_management::seats[50]={0};
 
 // Booking Class
 
-class Booking:public User_authentication{
+class Booking:public User_authentication,public Seat_management{
     protected:
         int no_of_passengers; //5 passenger allowed at one time
         int adult,infant,child;
         string flight_class;
         float fare;
         float baggae;
-        vector<Person> person_vector;
-        vector<Seat_management> seat_vector;
+        static vector<Person> person_vector;
+        static vector<Seat_management> seat_vector;
     public:
         float fare_calculation(string c,float weight){
             do
@@ -1307,28 +1297,25 @@ class Booking:public User_authentication{
                             else if (class_choice==1)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    Seat_management s;
-                                    s.show_economy_free_seats();
-                                    s.book_seat(class_choice);
-                                    seat_vector.push_back(s);
+                                    show_economy_free_seats();
+                                    book_seat(class_choice);
+                                    seat_vector.push_back(*this);
                                     break;
                                 }
                             else if(class_choice==2)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    Seat_management s;
-                                    s.show_buisness_free_seats();
-                                    s.book_seat(class_choice);
-                                    seat_vector.push_back(s);
+                                    show_buisness_free_seats();
+                                    book_seat(class_choice);
+                                    seat_vector.push_back(*this);
                                     break;
                                 }
                             else
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    Seat_management s;
-                                    s.show_first_free_seats();
-                                    s.book_seat(class_choice);
-                                    seat_vector.push_back(s);
+                                    show_first_free_seats();
+                                    book_seat(class_choice);
+                                    seat_vector.push_back(*this);
                                     break;
                                 }
                         } while (true);
@@ -1355,24 +1342,30 @@ class Booking:public User_authentication{
                } while (true);
             }
         }
+        
 };
 
-// Payment class 
+//Initiliztion of static vectors
+vector<Person> Booking::person_vector;
+vector<Seat_management> Booking::seat_vector;
 
+// Payment class 
+class Reciept;
 
 class Payment:public Booking{
+    friend Reciept;
     protected:
         float pay_money;
         map <string,int> rates;
-        Search_flight s;
         public:
         static vector<Payment> pay;
+        Search_flight s;
         Payment(){
             rates["USD"] = 285.0;   // US Dollar
             rates["EUR"] = 310.0;   // Euro
             rates["Pound"] = 360.0;   // British Pound
-            rates["Yen"] = 2.0;     // Japanese Yen
-            rates["AUD"] = 190.0;   // Australian Dollar
+            rates["Dirham"] = 76.37;     // UAE Dirham
+            rates["Saudi Riyal"] = 74.79;   // Saudi Riyal
         }
         float currency_convertor(float money,int n){
             switch (n)
@@ -1384,18 +1377,15 @@ class Payment:public Booking{
             case 3:
                 return rates["Pound"]*money;
             case 4:
-                return rates["Yen"]*money;
+                return rates["Dirham"]*money;
             case 5:
-                return rates["AUD"]*money;
+                return rates["Saudi Riyal"]*money;
             default:
                 cout<<"Invalid input"<<endl;
                 return 0.0f;
             }
         }
-        void payment_process(){
-            s.input_flight_search_details();
-            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-            s.show_flights();
+        void general_payment_process(Search_flight &s1){
             do
             {
                 cout<<"\nDo you want to book this flight\n1.Yes\n2.No\n"<<endl;
@@ -1405,12 +1395,13 @@ class Payment:public Booking{
                 if (dec==1)
                 {
                     Booking::start_Booking();
-                    float bill=Booking::fare_calculation(s.return_arrival_Country(),baggae);
+                    float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
                     cout<<"Your Total Bill is = "<<bill<<endl<<endl;
                     cout<<"Here is the list of Available Payment Currencies\n"<<endl;
                     int i=1;
                     for (auto &c:rates){
                         cout<<i<<". "<<c.first<<" : "<<c.second<<endl;
+                        i++;
                     }
                     cout<<"Enter currency choice = ";
                     int choice;
@@ -1510,26 +1501,143 @@ class Payment:public Booking{
             cout<<"Enter Your Password = ";
             getline(cin,password);
         }
+    void new_full_Booking_process(){
+            s.input_flight_search_details();
+            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+            s.show_flights();
+            general_payment_process(s);
+    }
+    
 };
+vector<Payment> Payment::pay;
+// Final Receipt class
 
+class Reciept final :public Payment{
+    public:
+        static void cancel_flight()
+        {
+            cout<<"Enter Your Cnic Number = ";
+            long long int temp_cnic;
+            cin>>temp_cnic;
+            cin.ignore();
+            for (auto &p:pay)
+            {
+                if(p.cnic==temp_cnic){
+                    cout<<"\nHere are your Ticket Details:\n"<<endl;
+                    //show function
+                    cout<<"\nYou want to cancel flight\n"<<
+                    "1.yes\n2.No"<<endl;
+                    int c_choice;
+                    do
+                        {
+                            cout<<"Enter your choice = ";
+                            cin>>c_choice;
+                            cin.ignore();
+                            if (c_choice==1 || c_choice==2)
+                            {
+                                break;
+                            }else{
+                                cout<<"You Entered Wrong Choice!"<<endl;
+                            }
+                        } while (true);
+                    if (c_choice==1)
+                        {
+                        for (auto &c:Booking::seat_vector)
+                        {
+                                if (p.seat_no==c.return_seat_no())
+                                {
+                                p.cancel_seat();
+                                break;
+                                }
+                        }
+                        pay.pop_back();
+                        cout<<endl<<"Flight cancelled Seccessfully!"<<endl;
+                        break;
+                        }
+                    else
+                        {
+                            cout<<"OK As you Wish!\n"<<endl;
+                            break;
+                        }  
+                }
+            }
+        }
+        void generate_reciept(){
+            s.show_flights();
+            float bill=Booking::fare_calculation(s.return_arrival_Country(),baggae);
+            cout<<"Total Paid amount is = "<<bill<<endl<<endl;
+        }
 
-
+};
 int main()
 {
-    // User_authentication u1,u2;
-    // u1.signup();
-    // // u1.login();
-    // // u1.check_details();
-    // u1.edit_details();
-    // // u2.signup();
-    // // u2.login();
-    Search_flight s1;
-    s1.input_flight_search_details();
-    cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-    s1.show_flights();
-   
+    bool start=true;
+    while(start){
+        cout<<"Welcome To Our Air Ticket Booking system\n"<<endl;
+        cout<<"Which Function you want to perform\n1.SignUP\n2.Login\n"<<
+        "3.Check Account Details\n4.Search Flight\n5.Flight Booking\n6.Cancel Flight\n"<<
+        "7.Exit\nEnter Option you want to perform = ";
+        int choice;
+        cin>>choice;
+        cin.ignore();
+        switch (choice)
+        {
+        case 1:{
+            User_authentication u1;
+            u1.signup();
+            break;
+            }
+        case 2:
+            User_authentication::login();
+            break;
+        case 3:
+            User_authentication::check_details();
+            break;
+        case 4:{
+            Search_flight s1;
+            s1.input_flight_search_details();
+            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+            s1.show_flights();
+            cout<<"Do you Want to Book This Flight:\n1.YES\n2.No"<<endl;
+            int c_choice;
+            do
+                {
+                    cout<<"Enter your choice = ";
+                    cin>>c_choice;
+                    cin.ignore();
+                    if (c_choice==1 || c_choice==2)
+                    {
+                        break;
+                    }else{
+                        cout<<"You Entered Wrong Choice!"<<endl;
+                    }
+                } while (true);
+                if (c_choice==1)
+                    {
+                        Payment p1;
+                        p1.general_payment_process(s1);
+                    }
+                else
+                    {
+                        cout<<"OK As you Wish!\n"<<endl;
+                    }          
+            break;
+        }
+        case 5:{
+            Reciept r1;
+            r1.new_full_Booking_process();
+            break;
+            }
+        case 6:
+            Reciept::cancel_flight();
+            break;
+        case 7:
+            start=false;
+        default:
+            cout<<"You Entered Wrong Choice!\n"<<endl;
+            break;
+        }
+    }
     
-
-
 return 0;
 }
