@@ -19,10 +19,8 @@ class Person{
             getline(cin,last_name);
             cout<<"Enter CNIC = ";
             cin>>cnic;
-            cin.ignore();
             cout<<"Enter Passport = ";
             cin>>passport;
-            cin.ignore();
             cout<<"Enter Phone Number = ";
             cin>>phone_number;
             cin.ignore();
@@ -43,13 +41,7 @@ class User_authentication:public Person{
         bool check_signup=false;
         static vector<User_authentication> user;
         void signup(){
-            cout<<"Enter your first name = ";
-            getline(cin,first_name);
-            cout<<"Enter your last name = ";
-            getline(cin,last_name);
-            cout<<"Enter your phone number = ";
-            cin>>phone_number;
-            cin.ignore();
+            Person::person_input();
             cout<<"Enter your email = ";
             getline(cin,email);
             cout<<"Set your password according to criteria\n"
@@ -117,21 +109,16 @@ class User_authentication:public Person{
             getline(cin,temp_mail);
             cout<<"Enter your Password = ";
             getline(cin,temp_password);
-                bool find=false;
                 for (auto &u:user)
                 {
                     if (u.email==temp_mail && u.password==temp_password)
                         {
                             cout<<"Login successful"<<endl;
-                            find=true;
                             return 0;
                         }
                 }
-                if (!find)
-                {
                    cout<<"Email or password does not match with user credentials!"<<endl;
                    return -1;
-                }
             }
         static void check_details(){
             string temp_mail,temp_password;
@@ -270,7 +257,7 @@ class Flights{
         }
         void saudi_arabia(){
             cout<<"1.King Khalid International Airport(KIA)\tRiyadh"<<endl;
-            cout<<"2.King Fahd International Airport(FIA)\tDammam"<<endl;
+            cout<<"2.King Fahd International Airport(FIA)\t\tDammam"<<endl;
             cout<<"3.King Abdulaziz International Airport(AIA)\tJeddah"<<endl;
         }
 
@@ -1121,6 +1108,7 @@ class Seat_management{
                     }
                 }
             } while (true);
+            cin.ignore();
         }
          void cancel_seat(){
             int temp_seat;
@@ -1191,6 +1179,7 @@ class Booking:public User_authentication,public Seat_management{
                 }else{
                     cout<<"Enter a valid weight = ";
                     cin>>weight;
+                    cin.ignore();
                 }
                 
             } while (true);  
@@ -1221,6 +1210,7 @@ class Booking:public User_authentication,public Seat_management{
                     cout<<"Please give a valid input"<<endl;
                 }
             } while (true);
+            
             if (checking_account)
             {
                cout<<"Fill Details Below:\n"<<endl;
@@ -1237,11 +1227,15 @@ class Booking:public User_authentication,public Seat_management{
                         cout<<"How many Adults = ";
                         cin>>adult;
                         cin.ignore();
-                        if (sum+adult<=no_of_passengers)
+                        if (adult<=no_of_passengers)
                         {
                             sum+=adult;
+                            if (sum==no_of_passengers)
+                                    {
+                                        break;
+                                    }
                         }else{
-                            cout<<"Your selected number of passeger limit reached!\n"<<endl;
+                            cout<<"Your selected number of passeger limit Exceed!\n"<<endl;
                             continue;
                         }
                         cout<<"How many childs = ";
@@ -1251,13 +1245,18 @@ class Booking:public User_authentication,public Seat_management{
                                 if (adult>0)
                                 {
                                     sum+=child;
+                                    if (sum==no_of_passengers)
+                                    {
+                                        break;
+                                    }
+                                    
                                 }else{
                                     cout<<"Child cant travel without An Adult!"<<endl;
                                     continue;
                                 } 
                         }else{
                             cout<<"Maximum Limit Reached!"<<endl;
-                            break;
+                            continue;
                         }
                         cout<<"How many infants = ";
                         cin>>infant;
@@ -1273,15 +1272,17 @@ class Booking:public User_authentication,public Seat_management{
                                 } 
                         }else{
                             cout<<"Maximum Limit Reached!"<<endl;
-                            break;
+                            continue;
                         }
                     } while (true);
+
                     for (size_t i = 0; i < no_of_passengers; i++)
                     {
                         cout<<"Enter Passenger "<<i+1<<"details:\n"<<endl;
                         Person p;
                         p.person_input();
                         person_vector.push_back(p);
+
                         do
                         {
                             cout<<"Enter Class You want to Book:\n1.Economy\n"
@@ -1319,6 +1320,7 @@ class Booking:public User_authentication,public Seat_management{
                                     break;
                                 }
                         } while (true);
+
                         do
                         {
                             cout<<"Enter weight of your Baggage = ";
@@ -1332,14 +1334,15 @@ class Booking:public User_authentication,public Seat_management{
                                 cout<<"Weight shold be less than 20KG!\n"<<endl;
                             }
                         } while (true); //weight loop
-                        
-                        
 
-                    }
+                    } //For loop close
+                    break; //Main loop end
                 }else{
                     cout<<"PLease give valid input!"<<endl;
                 }
-               } while (true);
+
+               }while (true);
+            
             }
         }
         
@@ -1367,23 +1370,38 @@ class Payment:public Booking{
             rates["Dirham"] = 76.37;     // UAE Dirham
             rates["Saudi Riyal"] = 74.79;   // Saudi Riyal
         }
+        bool payment_checker(float pay_money,float bill){
+            if (pay_money>=bill)
+                {
+                    if (pay_money>bill)
+                    {
+                        float remain=pay_money-bill;
+                        cout<<"We will send back your remaining amount soon = "<<remain<<endl;
+                    }
+                    cout<<"Flight Booked Successfully"<<endl;
+                    pay.push_back(*this);
+                    return true;
+                }else{
+                    cout<<"Payment Insufficient"<<endl;
+                    return false;
+                }
+        }
         float currency_convertor(float money,int n){
             switch (n)
             {
             case 1:
-                return rates["USD"]*money;
+                return rates["Dirham"]*money;
             case 2:
                 return rates["EUR"]*money;
             case 3:
                 return rates["Pound"]*money;
             case 4:
-                return rates["Dirham"]*money;
-            case 5:
                 return rates["Saudi Riyal"]*money;
+            case 5:
+                return rates["USD"]*money;
             default:
-                cout<<"Invalid input"<<endl;
                 return 0.0f;
-            }
+            }      
         }
         void general_payment_process(Search_flight &s1){
             do
@@ -1403,10 +1421,21 @@ class Payment:public Booking{
                         cout<<i<<". "<<c.first<<" : "<<c.second<<endl;
                         i++;
                     }
-                    cout<<"Enter currency choice = ";
-                    int choice;
-                    cin>>choice;
-                    cin.ignore();
+                    int choice; //currency choice variable
+                    do
+                    {
+                       cout<<"Enter currency choice = ";
+                        cin>>choice;
+                        cin.ignore();
+                        if (choice<=0 || choice>5)
+                        {
+                            cout<<"Invalid choice!"<<endl;
+                        }else{
+                            break;
+                        }
+                        
+                    } while (true); //TO handle wrong currency choice
+                    
                     cout<<"Here is the list of Available Payment methods"<<endl<<
                     "Select one of them\n1.Debit card\n2.Credit card\n3.Online banking\n"<<
                     endl;
@@ -1419,44 +1448,38 @@ class Payment:public Booking{
                         float temp_money;
                         if(pay_m==1 || pay_m==2){// same method for both
                             debit_card();
-                            cout<<"Enter amount of transaction = ";
-                            cin>>temp_money;
-                            cin.ignore();
-                            pay_money=currency_convertor(temp_money,choice);
-                            if (pay_money>=bill)
+                            do
                             {
-                                if (pay_money>bill)
+                               cout<<"Enter amount of transaction = ";
+                                cin>>temp_money;
+                                cin.ignore();
+                                pay_money=currency_convertor(temp_money,choice);
+                                bool pay_check=payment_checker(pay_money,bill);
+                                if (pay_check)
                                 {
-                                    float remain=pay_money-bill;
-                                    cout<<"We will send back your remaining amount soon = "<<remain<<endl;
+                                    break;
                                 }
-                                cout<<"Flight Booked Successfully"<<endl;
-                                pay.push_back(*this);
-                                break;
-                            }else{
-                                cout<<"Payment Insufficient"<<endl;
-                            }
-                            
+                            } while (true);
+                            break; //payment method loop break
                         }else if (pay_m==3)
                         {
                             bank_account();
                             cout<<"Enter amount of transaction = ";
                             cin>>temp_money;
                             cin.ignore();
-                            pay_money=currency_convertor(temp_money,choice);
-                            if (pay_money>=bill)
+                            do
                             {
-                                if (pay_money>bill)
+                               cout<<"Enter amount of transaction = ";
+                                cin>>temp_money;
+                                cin.ignore();
+                                pay_money=currency_convertor(temp_money,choice);
+                                bool pay_check=payment_checker(pay_money,bill);
+                                if (pay_check)
                                 {
-                                    float remain=pay_money-bill;
-                                    cout<<"We will send back your remaining amount soon = "<<remain<<endl;
+                                    break;
                                 }
-                                cout<<"Flight Booked Successfully"<<endl;
-                                pay.push_back(*this);
-                                break;
-                            }else{
-                                cout<<"Payment Insufficient"<<endl;
-                            }
+                            } while (true);
+                            break; //payment method loop break
                         }else{
                             cout<<"\nInvalid Choice!\n"<<endl;
                         }
@@ -1468,36 +1491,33 @@ class Payment:public Booking{
                 }else{
                     cout<<"Invalid Choice!\n"<<endl;
                 }
-                } while (true);   
+            } while (true);
         }
         void debit_card(){
             string name;
             long long card_number;
             Date d2;
-            int ccv;
+            string ccv;
             cout<<"Enter your Name = ";
             getline(cin,name);
             cout<<"Enter 16-Digit Card Number = ";
             cin>>card_number;
-            cin.ignore();
             cout<<"Enter Expiry Date (x/y/z) = ";
             char ch;
             cin>>d2.date>>ch>>d2.month>>ch>>d2.year;
-            cout<<"Enter 3-Digit CCV Number = ";
-            cin>>ccv;
             cin.ignore();
+            cout<<"Enter 3-Digit CCV Number = ";
+            getline(cin,ccv);
         }
         void bank_account(){
             string bank_name,password;
-            long long account_no,rec_no;
+            string account_no,rec_no;
             cout<<"Enter your Bank Name = ";
             getline(cin,bank_name);
             cout<<"Enter your account number = ";
-            cin>>account_no;
-            cin.ignore();
-            cout<<"Enter Reciever account number = ";;
-            cin>>rec_no;
-            cin.ignore();
+            getline(cin,account_no);
+            cout<<"Enter Reciever account number = ";
+            getline(cin,rec_no);
             cout<<"Enter Your Password = ";
             getline(cin,password);
         }
@@ -1520,6 +1540,7 @@ class Reciept final :public Payment{
             long long int temp_cnic;
             cin>>temp_cnic;
             cin.ignore();
+            int i=0;
             for (auto &p:pay)
             {
                 if(p.cnic==temp_cnic){
@@ -1550,7 +1571,7 @@ class Reciept final :public Payment{
                                 break;
                                 }
                         }
-                        pay.pop_back();
+                        pay.erase(pay.begin()+i);
                         cout<<endl<<"Flight cancelled Seccessfully!"<<endl;
                         break;
                         }
@@ -1560,6 +1581,7 @@ class Reciept final :public Payment{
                             break;
                         }  
                 }
+                i++;
             }
         }
         void generate_reciept(){
@@ -1572,8 +1594,8 @@ class Reciept final :public Payment{
 int main()
 {
     bool start=true;
+    cout<<"Welcome To Our Air Ticket Booking system\n"<<endl;
     while(start){
-        cout<<"Welcome To Our Air Ticket Booking system\n"<<endl;
         cout<<"Which Function you want to perform\n1.SignUP\n2.Login\n"<<
         "3.Check Account Details\n4.Search Flight\n5.Flight Booking\n6.Cancel Flight\n"<<
         "7.Exit\nEnter Option you want to perform = ";
@@ -1598,29 +1620,9 @@ int main()
             s1.input_flight_search_details();
             cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
             s1.show_flights();
-            cout<<"Do you Want to Book This Flight:\n1.YES\n2.No"<<endl;
-            int c_choice;
-            do
-                {
-                    cout<<"Enter your choice = ";
-                    cin>>c_choice;
-                    cin.ignore();
-                    if (c_choice==1 || c_choice==2)
-                    {
-                        break;
-                    }else{
-                        cout<<"You Entered Wrong Choice!"<<endl;
-                    }
-                } while (true);
-                if (c_choice==1)
-                    {
-                        Payment p1;
-                        p1.general_payment_process(s1);
-                    }
-                else
-                    {
-                        cout<<"OK As you Wish!\n"<<endl;
-                    }          
+            Reciept p1;
+            p1.general_payment_process(s1);
+            p1.generate_reciept();
             break;
         }
         case 5:{
