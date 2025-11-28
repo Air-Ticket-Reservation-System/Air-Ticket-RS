@@ -3,6 +3,8 @@
 #include <cstring>
 #include <vector>
 #include <map>
+#include <ctime>
+#include <array>
 #define UAE_PRICE 100000
 #define SA_PRICE 150000
 using namespace std;
@@ -262,7 +264,7 @@ class Flights{
         }
 
         // List of Airport Flights
-        void Allama_Iqbal(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
+        string Allama_Iqbal(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -280,7 +282,8 @@ class Flights{
                 {
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : LHE-DXB-301R"<<endl<<
+                        string flight_id = "LHE-DXB-301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf1"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -295,10 +298,12 @@ class Flights{
                         "Return Time : 11:30 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        string flight_id = "LHE-SIA-201F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf2"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -313,9 +318,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else if (lower_case_ai=="aia"){
-                        cout<<"flight_id : LHE-AIA-101A"<<endl<<
+                        string flight_id = "LHE-AIA-101A";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -330,9 +337,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else{
                         cout<<"You Entered wrong Details!"<<endl;
+                        return "";
                     }
                     
                     
@@ -340,7 +349,8 @@ class Flights{
                 {
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : LHE-KIA-409F"<<endl<<
+                        string flight_id = "LHE-KIA-409F";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -355,10 +365,12 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        string flight_id = "LHE-AIA-1C01A";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -373,9 +385,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else {
-                        cout<<"flight_id : LHE-AIA-301R"<<endl<<
+                        string flight_id = "LHE-AIA-30S1R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Lahore"<<endl<<
@@ -390,6 +404,7 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }   
                 }
@@ -397,7 +412,8 @@ class Flights{
                 if (lower_case=="uae"){
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : LHE-DXB-301R"<<endl<<
+                        string flight_id = "LHE-DXB-30T1R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Express"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -410,10 +426,12 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : LHE-SIA-201F"<<endl<<
+                        string flight_id = "LHE-SIA-20E1F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : AirBlue Sky"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -426,9 +444,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else{
-                        cout<<"flight_id : LHE-AIA-301R"<<endl<<
+                        string flight_id = "LHE-AIA-30Y1R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -441,12 +461,14 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }
                 }else if(lower_case=="saudi arabia"){
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : LHE-KIA-1209F"<<endl<<
+                        string flight_id = "LHE-KIA-12B09F";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -459,10 +481,12 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : LHE-SIA-2701F"<<endl<<
+                        string flight_id = "LHE-SIA-A2701F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -475,9 +499,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }else{
-                        cout<<"flight_id : LHE-AIA-F301R"<<endl<<
+                        string flight_id = "LHE-AIA-BF301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Lahore"<<endl<<
@@ -490,14 +516,15 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
 
                     }
                 }
                     
             }
-            
+           return ""; 
         }
-        void faisalabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
+        string faisalabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -515,7 +542,8 @@ class Flights{
                 {
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : FIA-DXB-3501R"<<endl<<
+                        string flight_id = "FIA-DXB-N3501R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf1"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -530,9 +558,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : FIA-SIA-2041F"<<endl<<
+                        string flight_id = "FIA-SIA-2041FE";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf2"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -547,8 +577,10 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : FIA-AIA-1011A"<<endl<<
+                        string flight_id = "FIA-AIA-1011AD";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -563,12 +595,14 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }    
                 }else if (lower_case=="saudi arabia")
                 {
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : FIA-KIA-2409F"<<endl<<
+                        string flight_id = "FIA-KIA-2409GF";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -583,9 +617,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : FIA-SIA-3201F"<<endl<<
+                        string flight_id = "FIA-SIA-320Q1F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -600,8 +636,10 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : FIA-AIA-3301R"<<endl<<
+                        string flight_id = "FIA-AIA-V3301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -616,13 +654,15 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }   
                 }     
             }else{
                 if (lower_case=="uae"){
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : FIA-DXB-6301R"<<endl<<
+                        string flight_id = "FIA-DXB-W6301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Express"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -635,9 +675,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : FIA-SIA-201F"<<endl<<
+                        string flight_id = "FIA-SIA-S201F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : AirBlue Sky"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -650,8 +692,10 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : FIA-AIA-301R"<<endl<<
+                        string flight_id = "FIA-AIA-M301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -664,13 +708,15 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                 }
                 else if (lower_case=="saudi arabia")
                 {
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : FIA-KIA-1209F"<<endl<<
+                        string flight_id = "FIA-KIA-12L09F";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -683,9 +729,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : FIA-SIA-2701F"<<endl<<
+                        string flight_id = "FIA-SIA-27P01F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -698,8 +746,10 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : FIA-AIA-F301R"<<endl<<
+                        string flight_id = "FIA-AIA-F301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Faisalabad"<<endl<<
@@ -712,11 +762,13 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                 }       
-            }      
+            }  
+            return ""; //End of function   
         }
-        void islamabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
+        string islamabad(int d,int m,int y,string country,string arrival_airport,bool return_type=false){
             string lower_case;
             string lower_case_ai;
                 // for converting into lower case
@@ -734,7 +786,8 @@ class Flights{
                 {
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : ISB-DXB-3501R"<<endl<<
+                        string flight_id = "ISB-DXB-3501RZ";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf1"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -749,9 +802,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : ISB-SIA-2041F"<<endl<<
+                        string flight_id = "ISB-SIA-2041FQ";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf2"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -766,8 +821,10 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : ISB-AIA-1011A"<<endl<<
+                        string flight_id = "ISB-AIA-1011AO";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -782,6 +839,7 @@ class Flights{
                         "Return Time : 11:30:00 GMT+4"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                     
                     
@@ -789,7 +847,8 @@ class Flights{
                 {
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : ISB-KIA-2409F"<<endl<<
+                        string flight_id = "ISB-KIA-2409F";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -804,9 +863,11 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : ISB-SIA-3201F"<<endl<<
+                        string flight_id = "ISB-SIA-K3201F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -821,8 +882,10 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : ISB-AIA-3301R"<<endl<<
+                        string flight_id = "ISB-AIA-D3301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : Return"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -837,6 +900,7 @@ class Flights{
                         "Return Time : 11:30:00 GMT+3"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                     
                 }
@@ -846,7 +910,8 @@ class Flights{
                 if (lower_case=="uae"){
                     if (lower_case_ai=="dia")
                     {
-                        cout<<"flight_id : ISB-DXB-6301R"<<endl<<
+                        string flight_id = "ISB-DXB-6301R0";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Express"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -859,9 +924,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="sia")
                     {
-                       cout<<"flight_id : ISB-SIA-201F"<<endl<<
+                        string flight_id = "ISB-SIA-X201F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : AirBlue Sky"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -874,8 +941,10 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : ISB-AIA-301R"<<endl<<
+                        string flight_id = "ISB-AIA-J301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
                         "type : One-Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -888,13 +957,15 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                 }
                 else if (lower_case=="saudi arabia")
                 {
                     if (lower_case_ai=="kia")
                     {
-                        cout<<"flight_id : ISB-KIA-1209F"<<endl<<
+                        string flight_id = "ISB-KIA-1209F";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf11"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -907,9 +978,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else if (lower_case_ai=="fia")
                     {
-                       cout<<"flight_id : ISB-SIA-2701F"<<endl<<
+                        string flight_id = "ISB-SIA-2701F";
+                       cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -922,8 +995,10 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }else{
-                        cout<<"flight_id : ISB-AIA-F301R"<<endl<<
+                        string flight_id = "ISB-AIA-F301R";
+                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
                         "type : One Way"<<endl<<
                         "from : Islamabad"<<endl<<
@@ -936,9 +1011,11 @@ class Flights{
                         "Arrival Time : 10:00:00 GMT+5"<<endl<<
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
+                        return flight_id;
                     }
                 }   
             }
+            return "";
         }
 };
 
@@ -1030,19 +1107,23 @@ class Search_flight:public Flights{
             cin>>d.date>>ch>>d.month>>ch>>d.year;
             cin.ignore();
         }
-        void show_flights(){
+        string show_flights(){ //for getting flight id
             if (dept_airport==1)
             {
-                Flights::Allama_Iqbal(d.date,d.month,d.year,arrival_country,
+               string id= Flights::Allama_Iqbal(d.date,d.month,d.year,arrival_country,
                 arrival_airport,flight_type_return);
+                return id;
             }else if (dept_airport==2)
             {
-                Flights::faisalabad(d.date,d.month,d.year,arrival_country,
+                string id=Flights::faisalabad(d.date,d.month,d.year,arrival_country,
                 arrival_airport,flight_type_return);
+                return id;
             }else{
-                Flights::islamabad(d.date,d.month,d.year,arrival_country,
+                string id=Flights::islamabad(d.date,d.month,d.year,arrival_country,
                 arrival_airport,flight_type_return);
+                return id;
             }
+            return "";
         }
 };
 
@@ -1051,38 +1132,38 @@ class Seat_management{
     protected:
         int seat_no;
         public:
-        static int seats[50];
-        static void show_economy_free_seats(){
+        static map<string,array<int,50>> seats;
+        static void show_economy_free_seats(string id){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 0; i < 30; i++)
             {
-                if(seats[i]==0){
+                if(seats[id][i]==0){
                     cout<<i+1<<"\t";
                 }
             }
             cout<<endl;
         }
-        static void show_buisness_free_seats(){
+        static void show_buisness_free_seats(string id){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 30; i < 40; i++)
             {
-                if(seats[i]==0){
+                if(seats[id][i]==0){
                     cout<<i+1<<"\t";
                 }
             }
             cout<<endl;
         }
-        static void show_first_free_seats(){
+        static void show_first_free_seats(string id){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
             for (size_t i = 40; i < 50; i++)
             {
-                if(seats[i]==0){
+                if(seats[id][i]==0){
                     cout<<i+1<<"\t";
                 }
             }
             cout<<endl;
         }
-        void book_seat(int n){
+        void book_seat(int n,string id){// choice class parameter
             do
             {
                 int start,end;
@@ -1092,14 +1173,15 @@ class Seat_management{
                 cout<<"Enter seat number you want to book = ";
                 int seat_choice;
                 cin>>seat_choice;
+                cin.ignore();
                 if (seat_choice<start || seat_choice>end)
                 {
                     cout<<"Invalid seat number for this class!"<<endl;
                 }else{
                 
-                    if (seats[seat_choice-1]==0)
+                    if (seats[id][seat_choice-1]==0)
                     {
-                    seats[seat_choice-1]=1; // 1 for seat booked
+                    seats[id][seat_choice-1]=1; // 1 for seat booked
                     seat_no=seat_choice;
                     cout<<endl<<"Seat selected successfully!"<<endl;
                     break;
@@ -1108,9 +1190,8 @@ class Seat_management{
                     }
                 }
             } while (true);
-            cin.ignore();
         }
-         void cancel_seat(){
+         void cancel_seat(string id){
             int temp_seat;
             do
             {
@@ -1122,7 +1203,7 @@ class Seat_management{
                         cout<<endl<<"Please Sealect a valid seat!"<<endl;
                         continue;
                     }
-                if (seats[temp_seat-1]==0)
+                if (seats[id][temp_seat-1]==0)
                     {
                         // To avoid double cancellation
                         cout<<endl<<"Seat is already Freed!"<<endl;
@@ -1134,7 +1215,7 @@ class Seat_management{
                         continue;
                     }
                
-                   seats[temp_seat-1]=0; // 1 for seat booked
+                   seats[id][temp_seat-1]=0; // 1 for seat booked
                    seat_no=0;
                    cout<<endl<<"Seat Cancelled successfully!"<<endl;
                    break;
@@ -1146,7 +1227,7 @@ class Seat_management{
         }
 };
 
-int Seat_management::seats[50]={0};
+map<string,array<int,50>> Seat_management:: seats;
 
 
 
@@ -1184,7 +1265,7 @@ class Booking:public User_authentication,public Seat_management{
                 
             } while (true);  
         }
-        void start_Booking(){
+        void start_Booking(string id){
             cout<<"Login if you have an account.\nSignUp if you are new user\n"<<endl;
             int choice;
             bool checking_account=false;
@@ -1298,24 +1379,24 @@ class Booking:public User_authentication,public Seat_management{
                             else if (class_choice==1)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_economy_free_seats();
-                                    book_seat(class_choice);
+                                    show_economy_free_seats(id);
+                                    book_seat(class_choice,id);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
                             else if(class_choice==2)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_buisness_free_seats();
-                                    book_seat(class_choice);
+                                    show_buisness_free_seats(id);
+                                    book_seat(class_choice,id);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
                             else
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_first_free_seats();
-                                    book_seat(class_choice);
+                                    show_first_free_seats(id);
+                                    book_seat(class_choice,id);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
@@ -1403,7 +1484,7 @@ class Payment:public Booking{
                 return 0.0f;
             }      
         }
-        void general_payment_process(Search_flight &s1){
+        void general_payment_process(Search_flight &s1,string id){
             do
             {
                 cout<<"\nDo you want to book this flight\n1.Yes\n2.No\n"<<endl;
@@ -1412,7 +1493,7 @@ class Payment:public Booking{
                 cin.ignore();
                 if (dec==1)
                 {
-                    Booking::start_Booking();
+                    Booking::start_Booking(id);
                     float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
                     cout<<"Your Total Bill is = "<<bill<<endl<<endl;
                     cout<<"Here is the list of Available Payment Currencies\n"<<endl;
@@ -1522,10 +1603,18 @@ class Payment:public Booking{
             getline(cin,password);
         }
     void new_full_Booking_process(){
-            s.input_flight_search_details();
-            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-            s.show_flights();
-            general_payment_process(s);
+            do
+            {
+                s.input_flight_search_details();
+                cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+                string id=s.show_flights();
+                if (id!="")
+                {
+                    general_payment_process(s,id);
+                    break;
+                }
+                
+            } while (true);
     }
     
 };
@@ -1534,7 +1623,7 @@ vector<Payment> Payment::pay;
 
 class Reciept final :public Payment{
     public:
-        static void cancel_flight()
+        static void cancel_flight(string id)
         {
             cout<<"Enter Your Cnic Number = ";
             long long int temp_cnic;
@@ -1567,7 +1656,7 @@ class Reciept final :public Payment{
                         {
                                 if (p.seat_no==c.return_seat_no())
                                 {
-                                p.cancel_seat();
+                                p.cancel_seat(id);
                                 break;
                                 }
                         }
@@ -1585,6 +1674,7 @@ class Reciept final :public Payment{
             }
         }
         void generate_reciept(){
+            cout<<endl<<"Here is your Ticket Reciept:\n"<<endl;
             s.show_flights();
             float bill=Booking::fare_calculation(s.return_arrival_Country(),baggae);
             cout<<"Total Paid amount is = "<<bill<<endl<<endl;
@@ -1619,9 +1709,9 @@ int main()
             Search_flight s1;
             s1.input_flight_search_details();
             cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-            s1.show_flights();
+            string id=s1.show_flights();
             Reciept p1;
-            p1.general_payment_process(s1);
+            p1.general_payment_process(s1,id);
             p1.generate_reciept();
             break;
         }
@@ -1630,9 +1720,13 @@ int main()
             r1.new_full_Booking_process();
             break;
             }
-        case 6:
-            Reciept::cancel_flight();
+        case 6:{
+            cout<<"Enter Your Flight ID = ";
+            string id;
+            getline(cin,id);
+            Reciept::cancel_flight(id);
             break;
+            }
         case 7:
             start=false;
         default:
