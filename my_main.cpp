@@ -1349,7 +1349,8 @@ class Booking:public User_authentication,public Seat_management{
                 
             } while (true);  
         }
-        void start_Booking(string id,const Date &d1){
+        long double start_Booking(Search_flight &s1,string id,const Date &d1){
+            long double total_fare=0.0f;
             cout<<"Login if you have an account.\nSignUp if you are new user\n"<<endl;
             int choice;
             bool checking_account=false;
@@ -1443,7 +1444,7 @@ class Booking:public User_authentication,public Seat_management{
 
                     for (size_t i = 0; i < no_of_passengers; i++)
                     {
-                        cout<<"Enter Passenger "<<i+1<<"details:\n"<<endl;
+                        cout<<"Enter Passenger "<<i+1<<" details:\n"<<endl;
                         Person p;
                         p.person_input();
                         person_vector.push_back(p);
@@ -1494,6 +1495,7 @@ class Booking:public User_authentication,public Seat_management{
                             cin.ignore();
                             if(temp_weight>=0 && temp_weight<=20){
                                 baggae=temp_weight;
+                                total_fare+=fare_calculation(s1.return_arrival_Country(),baggae);
                                 break;
                             }else{
                                 cout<<"Weight shold be less than 20KG!\n"<<endl;
@@ -1509,6 +1511,7 @@ class Booking:public User_authentication,public Seat_management{
                }while (true);
             
             }
+            return total_fare; //End of function
         }
         
 };
@@ -1528,6 +1531,7 @@ class Payment:public Booking{
         public:
         static vector<Payment> pay;
         Search_flight s;
+        long double total_fare;
         Payment(){
             rates["USD"] = 285.0;   // US Dollar
             rates["EUR"] = 310.0;   // Euro
@@ -1577,9 +1581,9 @@ class Payment:public Booking{
                 cin.ignore();
                 if (dec==1)
                 {
-                    Booking::start_Booking(id,d);
-                    float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
-                    cout<<"Your Total Bill is = "<<bill<<endl<<endl;
+                    total_fare=Booking::start_Booking(s1,id,d);
+                    cout<<endl;
+                    cout<<"Your Total Bill is = "<<total_fare<<endl<<endl;
                     cout<<"Here is the list of Available Payment Currencies\n"<<endl;
                     int i=1;
                     for (auto &c:rates){
@@ -1619,7 +1623,7 @@ class Payment:public Booking{
                                 cin>>temp_money;
                                 cin.ignore();
                                 pay_money=currency_convertor(temp_money,choice);
-                                bool pay_check=payment_checker(pay_money,bill);
+                                bool pay_check=payment_checker(pay_money,total_fare);
                                 if (pay_check)
                                 {
                                     break;
@@ -1635,7 +1639,7 @@ class Payment:public Booking{
                                 cin>>temp_money;
                                 cin.ignore();
                                 pay_money=currency_convertor(temp_money,choice);
-                                bool pay_check=payment_checker(pay_money,bill);
+                                bool pay_check=payment_checker(pay_money,total_fare);
                                 if (pay_check)
                                 {
                                     break;
@@ -1742,9 +1746,17 @@ class Reciept final :public Payment{
         void generate_reciept(Search_flight &s1){
             cout<<endl;
             cout<<"Here is your Ticket Reciept:\n"<<endl;
+            int i=1;
+            for (auto &p:person_vector)
+            {
+                cout<<endl;
+                cout<<"Passeger Details "<<i++<<" :"<<endl;
+                p.show();
+                cout<<endl;
+            }
+            
             s1.show_flights();
-            float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
-            cout<<"Total Paid amount is = "<<bill<<endl<<endl;
+            cout<<"Total Paid amount is = "<<total_fare<<endl<<endl;
         }
 
 };
@@ -1764,13 +1776,16 @@ int main()
         case 1:{
             User_authentication u1;
             u1.signup();
+            cout<<endl;
             break;
             }
         case 2:
             User_authentication::login();
+            cout<<endl;
             break;
         case 3:
             User_authentication::check_details();
+            cout<<endl;
             break;
         case 4:{
             Search_flight s1;
@@ -1781,6 +1796,7 @@ int main()
             p1.general_payment_process(s1,id,temp_date);
             cout<<endl;
             p1.generate_reciept(s1);
+            cout<<endl;
             break;
         }
         case 5:{
@@ -1792,6 +1808,7 @@ int main()
             p1.general_payment_process(s1,id,temp_date);
             cout<<endl;
             p1.generate_reciept(s1);
+            cout<<endl;
             break;
         }
         case 6:{
@@ -1804,6 +1821,7 @@ int main()
             cin>>temp.date>>ch>>temp.month>>temp.year;
             Reciept::cancel_flight(id,temp);
             cin.ignore();
+            cout<<endl;
             break;
             }
         case 7:
@@ -1811,6 +1829,7 @@ int main()
             break;
             default:
             cout<<"You Entered Wrong Choice!\n"<<endl;
+            cout<<endl;
             break;
         }
     }
