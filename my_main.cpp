@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include <string>
 #include <cstring>
 #include <vector>
@@ -8,6 +9,14 @@
 #define UAE_PRICE 100000
 #define SA_PRICE 150000
 using namespace std;
+
+//Global Function to get actual date
+string get_actual_date(){
+    auto now=chrono::system_clock::now();
+    time_t time=chrono::system_clock::to_time_t(now);
+    tm* local_date=localtime(&time);
+    return to_string(local_date->tm_mday)+to_string(local_date->tm_mon)+to_string(local_date->tm_year+1900);
+}
 class Person{
     protected:
         string first_name;
@@ -19,12 +28,38 @@ class Person{
             getline(cin,first_name);
             cout<<"Enter Last name = ";
             getline(cin,last_name);
-            cout<<"Enter CNIC = ";
-            cin>>cnic;
-            cout<<"Enter Passport = ";
-            cin>>passport;
-            cout<<"Enter Phone Number = ";
-            cin>>phone_number;
+            do
+            {
+                cout<<"Enter CNIC = ";
+                cin>>cnic;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid CNIC!"<<endl;
+                        continue;
+                    }
+                cout<<"Enter Passport = ";
+                cin>>passport;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Passport!"<<endl;
+                        continue;
+                    }
+                cout<<"Enter Phone Number = ";
+                cin>>phone_number;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Phone Number!"<<endl;
+                        continue;
+                    }
+                break;
+            } while (true);
+            
             cin.ignore();
         }
         void show(){
@@ -154,8 +189,6 @@ class User_authentication:public Person{
             getline(cin,temp_mail);
             cout<<"Enter your Password = ";
             getline(cin,temp_password);
-            if (check_signup)
-            {
                 bool find=false;
                 for (auto &u:user)
                 {
@@ -236,9 +269,100 @@ class User_authentication:public Person{
                 {
                    cout<<"Email or password does not match with user credentials!"<<endl;
                 }
-            }else{
-                cout<<"You do not have any account yet!"<<endl;
+        }
+        void forgot_password(){
+            string temp_mail,temp_password;
+            cout<<"Enter your email = ";
+            getline(cin,temp_mail);
+            do
+            {
+               long int phone_n;
+               cout<<"Enter Phone Number = ";
+                cin>>phone_number;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Phone Number!"<<endl;
+                        continue;
+                    }
+                cin.ignore();
+                break;
+            } while (true);
+            cout<<"Enter 4-Digit pin code sent on Phone Number = ";
+            getline(cin,temp_password);
+            for (auto &u:user)
+            {
+                if (u.email==temp_mail)
+                {
+                    cout<<endl;
+                    cout<<"Enter New Password\n"<<endl;
+                    cout<<"Set your password according to criteria\n"
+                            "Password must have at least 8 characters\n"
+                            "password must have one upercase,lowercase,digit\n"
+                            "and special character"<<endl;
+                            bool overall_check=false;
+                            do
+                            {
+                                bool upper_case_check=false;
+                                bool lower_case_check=false;
+                                bool digit_check=false;
+                                bool special_char_check=false;
+                                cout<<endl;
+                                cout<<"Enter your password = ";
+                                getline(cin,u.password);
+                                int len=u.password.length();
+                                if (len>=8)
+                                {
+                                    for (size_t i = 0; i < len; i++)
+                                    {
+                                        if (isupper(u.password[i]))
+                                            {
+                                                upper_case_check=true;
+                                                
+                                            }
+                                        else if (islower(u.password[i]))
+                                            {
+                                                lower_case_check=true;
+                                                
+                                            }
+                                        else if (isdigit(u.password[i]))
+                                            {
+                                                digit_check=true;
+                                                
+                                            }
+                                        else if (ispunct(u.password[i]))
+                                            {
+                                                special_char_check=true;
+                                                
+                                            }
+                                    }
+                                    if (upper_case_check==true && lower_case_check==true &&
+                                            digit_check==true && special_char_check==true)
+                                            {
+                                                overall_check=true;
+                                                cout<<endl;
+                                                cout<<"Password Changed Seccessfully!"<<endl;
+                                                cout<<endl;
+                                                break;
+                                            }
+                                        else{
+                                            cout<<endl;
+                                            cout<<"Password does not match with criteria Try Again!"<<endl;
+                                        } 
+                                }
+                                else
+                                    {
+                                        cout<<"Password must have atleast 8 characters long!\n";
+                                    } 
+                            } while (!overall_check);
+                    
+                }else{
+                    cout<<"Credentials did not match!"<<endl;
+                }
+                
             }
+            
         }
 };
 vector<User_authentication> User_authentication::user;
@@ -1025,6 +1149,26 @@ struct Date
     int date,month,year;
 };
 
+
+
+bool check_valid_date(const Date &d){
+    if ((d.year==2025 ||d.year==2026) && d.date<=31 && d.month<=12 &&d.date>=1 && d.month>=1)
+    {
+        string temp_d=d.date<10?"0"+to_string(d.date):to_string(d.date);
+        string temp_m=d.month<10?"0"+to_string(d.month):to_string(d.month);
+        string final_date=temp_d+temp_m+to_string(d.year);
+        int int_date=stoi(final_date);
+        if (int_date>=stoi(get_actual_date()))
+    {
+        return true;
+    }
+    }else{
+        return false;
+    }
+    
+    return false;
+}
+
 class Search_flight:public Flights{
     protected:
         int dept_airport;
@@ -1102,10 +1246,22 @@ class Search_flight:public Flights{
                     cout<<endl<<"You Entered Wrong Details!"<<endl;
                 }
             } while (true);
-            cout<<"Enter Departure Date (x/y/z) = ";
-            char ch;
-            cin>>d.date>>ch>>d.month>>ch>>d.year;
-            cin.ignore();
+            
+            do
+            {
+                cout<<"Enter Departure Date (x/y/z) = ";
+                char ch;
+                cin>>d.date>>ch>>d.month>>ch>>d.year;
+                cin.ignore();
+                if (check_valid_date(d))
+                {
+                    break;
+                }else{
+                    cout<<endl;
+                    cout<<"Please input valid Date!"<<endl;
+                }
+                
+            } while (true);
             return d;
         }
         string show_flights(){ //for getting flight id
@@ -1661,17 +1817,28 @@ class Payment:public Booking{
         }
         void debit_card(){
             string name;
-            long long card_number;
+            string card_number;
             Date d2;
             string ccv;
             cout<<"Enter your Name = ";
             getline(cin,name);
             cout<<"Enter 16-Digit Card Number = ";
-            cin>>card_number;
-            cout<<"Enter Expiry Date (x/y/z) = ";
-            char ch;
-            cin>>d2.date>>ch>>d2.month>>ch>>d2.year;
-            cin.ignore();
+            getline(cin,card_number);
+            do
+            {
+                cout<<"Enter Expiry Date (x/y/z) = ";
+                char ch;
+                cin>>d2.date>>ch>>d2.month>>ch>>d2.year;
+                cin.ignore();
+                if (check_valid_date(d2))
+                {
+                    break;
+                }else{
+                    cout<<endl;
+                    cout<<"Please input valid Date!"<<endl;
+                }
+                
+            } while (true);
             cout<<"Enter 3-Digit CCV Number = ";
             getline(cin,ccv);
         }
@@ -1695,10 +1862,11 @@ class Reciept final :public Payment{
     public:
         static void cancel_flight(string id,const Date &d)
         {
+            bool cancel=false;
             cout<<"Enter Your Cnic Number = ";
             long long int temp_cnic;
             cin>>temp_cnic;
-            cin.ignore();
+            // cin.ignore();
             int i=0;
             for (auto &p:pay)
             {
@@ -1732,15 +1900,22 @@ class Reciept final :public Payment{
                         }
                         pay.erase(pay.begin()+i);
                         cout<<endl<<"Flight cancelled Seccessfully!"<<endl;
+                        cancel=true;
                         break;
                         }
                     else
                         {
                             cout<<"OK As you Wish!\n"<<endl;
+                            cancel=true;
                             break;
                         }  
                 }
                 i++;
+            }
+            if (!cancel)
+            {
+                cout<<endl;
+                cout<<"CNIC does not match!"<<endl;
             }
         }
         void generate_reciept(Search_flight &s1){
@@ -1766,8 +1941,9 @@ int main()
     cout<<"Welcome To Our Air Ticket Booking system\n"<<endl;
     while(start){
         cout<<"Which Function you want to perform\n1.SignUP\n2.Login\n"<<
-        "3.Check Account Details\n4.Search Flight\n5.Flight Booking\n6.Cancel Flight\n"<<
-        "7.Exit\nEnter Option you want to perform = ";
+        "3.Check Account Details\n4.Edit Account Details\n5.Forgot Password\n"<<
+        "6.Search Flight\n7.Flight Booking\n8.Cancel Flight\n"<<
+        "9.Exit\nEnter Option you want to perform = ";
         int choice;
         cin>>choice;
         cin.ignore();
@@ -1788,18 +1964,16 @@ int main()
             cout<<endl;
             break;
         case 4:{
-            Search_flight s1;
-            Date temp_date=s1.input_flight_search_details();
-            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-            string id=s1.show_flights();
-            Reciept p1;
-            p1.general_payment_process(s1,id,temp_date);
-            cout<<endl;
-            p1.generate_reciept(s1);
-            cout<<endl;
+            User_authentication temp;
+            temp.edit_details();
             break;
         }
         case 5:{
+            User_authentication temp;
+            temp.forgot_password();
+            break;
+        }
+        case 6:{
             Search_flight s1;
             Date temp_date=s1.input_flight_search_details();
             cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
@@ -1811,20 +1985,43 @@ int main()
             cout<<endl;
             break;
         }
-        case 6:{
+        case 7:{
+            Search_flight s1;
+            Date temp_date=s1.input_flight_search_details();
+            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+            string id=s1.show_flights();
+            Reciept p1;
+            p1.general_payment_process(s1,id,temp_date);
+            cout<<endl;
+            p1.generate_reciept(s1);
+            cout<<endl;
+            break;
+        }
+        case 8:{
             char ch;
             Date temp;
             cout<<"Enter Your Flight ID = ";
             string id;
             getline(cin,id);
-            cout<<"Enter Your Flight Date(xx/yy/zzzz) = ";
-            cin>>temp.date>>ch>>temp.month>>temp.year;
+            do
+            {
+                cout<<"Enter Your Flight Date(xx/yy/zzzz) = ";
+                cin>>temp.date>>ch>>temp.month>>ch>>temp.year;
+                cin.ignore();
+                if ((temp.year==2025 ||temp.year==2026) && temp.month>=11)
+                {
+                    break;
+                }else{
+                    cout<<endl;
+                    cout<<"Please input valid Date!"<<endl;
+                }
+                
+            } while (true);
             Reciept::cancel_flight(id,temp);
-            cin.ignore();
             cout<<endl;
             break;
             }
-        case 7:
+        case 9:
             start=false;
             break;
             default:
