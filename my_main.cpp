@@ -1040,7 +1040,7 @@ class Search_flight:public Flights{
         string return_arrival_Country(){
             return toLower(arrival_country);
         }
-        void input_flight_search_details(){
+        Date input_flight_search_details(){
             cout<<"\nThese Airports are available:\n";
             Flights::pakistan_airports();
             cout<<"\n";
@@ -1106,6 +1106,7 @@ class Search_flight:public Flights{
             char ch;
             cin>>d.date>>ch>>d.month>>ch>>d.year;
             cin.ignore();
+            return d;
         }
         string show_flights(){ //for getting flight id
             if (dept_airport==1)
@@ -1132,38 +1133,119 @@ class Seat_management{
     protected:
         int seat_no;
         public:
-        static map<string,array<int,50>> seats;
-        static void show_economy_free_seats(string id){
-            cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
-            for (size_t i = 0; i < 30; i++)
+        static map<string,map<string,array<int,50>>> seats;
+
+        static string convert_date_to_string(const Date &d1){
+            return to_string(d1.date)+to_string(d1.month)+to_string(d1.year);
+        }
+        static bool check_date(string d,string id){
+            if (seats.count(id)==0)
             {
-                if(seats[id][i]==0){
-                    cout<<i+1<<"\t";
-                }
+                return false;
+            }else if (seats[id].count(d)==0)
+            {
+                return false;
             }
+            return true;
+            
+        }
+        static void show_seats(int choice,string id,const Date &d1){
+            string date=convert_date_to_string(d1);
+            if (check_date(date,id))
+                    {
+                        switch (choice)
+                        {
+                        case 1:
+                            for (size_t i = 0; i < 30; i++)
+                            {
+                                if(seats[id][date][i]==0)
+                                {
+                                    cout<<i+1<<"\t";
+                                }
+                            }
+                            cout<<endl;
+                            break;
+                        case 2:
+                            for (size_t i = 30; i < 40; i++)
+                            {
+                                if(seats[id][date][i]==0)
+                                {
+                                    cout<<i+1<<"\t";
+                                }
+                            }
+                            cout<<endl;
+                            break;
+                        case 3:
+                            for (size_t i = 40; i < 50; i++)
+                            {
+                                if(seats[id][date][i]==0)
+                                {
+                                    cout<<i+1<<"\t";
+                                }
+                            }
+                            cout<<endl;
+                            break;
+                        
+                        default:
+                            break;
+                        }
+                        return; 
+                }
+                seats[id][date].fill(0);
+                switch (choice)
+                {
+                case 1:
+                    for (size_t i = 0; i < 30; i++)
+                    {
+                        if(seats[id][date][i]==0)
+                        {
+                            cout<<i+1<<"\t";
+                        }
+                    }
+                    cout<<endl;
+                    break;
+                case 2:
+                    for (size_t i = 30; i < 40; i++)
+                    {
+                        if(seats[id][date][i]==0)
+                        {
+                            cout<<i+1<<"\t";
+                        }
+                    }
+                    cout<<endl;
+                    break;
+                case 3:
+                    for (size_t i = 40; i < 50; i++)
+                    {
+                        if(seats[id][date][i]==0)
+                        {
+                            cout<<i+1<<"\t";
+                        }
+                    }
+                    cout<<endl;
+                    break;
+                
+                default:
+                    break;
+                }
+                
             cout<<endl;
         }
-        static void show_buisness_free_seats(string id){
+        static void show_economy_free_seats(string id,const Date &d1){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
-            for (size_t i = 30; i < 40; i++)
-            {
-                if(seats[id][i]==0){
-                    cout<<i+1<<"\t";
-                }
+                show_seats(1,id,d1);
             }
-            cout<<endl;
-        }
-        static void show_first_free_seats(string id){
+    
+        static void show_buisness_free_seats(string id,const Date &d1){
             cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
-            for (size_t i = 40; i < 50; i++)
-            {
-                if(seats[id][i]==0){
-                    cout<<i+1<<"\t";
-                }
-            }
-            cout<<endl;
+            show_seats(2,id,d1);
         }
-        void book_seat(int n,string id){// choice class parameter
+        static void show_first_free_seats(string id,const Date &d1){
+            cout<<endl<<"Here are the seats available in your selected class:\n"<<endl;
+            show_seats(3,id,d1);
+        }
+        void book_seat(int n,string id,const Date &d){// choice class parameter
+            string date=convert_date_to_string(d);
             do
             {
                 int start,end;
@@ -1179,9 +1261,9 @@ class Seat_management{
                     cout<<"Invalid seat number for this class!"<<endl;
                 }else{
                 
-                    if (seats[id][seat_choice-1]==0)
+                    if (seats[id][date][seat_choice-1]==0)
                     {
-                    seats[id][seat_choice-1]=1; // 1 for seat booked
+                    seats[id][date][seat_choice-1]=1; // 1 for seat booked
                     seat_no=seat_choice;
                     cout<<endl<<"Seat selected successfully!"<<endl;
                     break;
@@ -1191,8 +1273,9 @@ class Seat_management{
                 }
             } while (true);
         }
-         void cancel_seat(string id){
+         void cancel_seat(string id,const Date &d1){
             int temp_seat;
+            string date=convert_date_to_string(d1);
             do
             {
                 cout<<"Enter your seat number = ";
@@ -1203,7 +1286,7 @@ class Seat_management{
                         cout<<endl<<"Please Sealect a valid seat!"<<endl;
                         continue;
                     }
-                if (seats[id][temp_seat-1]==0)
+                if (seats[id][date][temp_seat-1]==0)
                     {
                         // To avoid double cancellation
                         cout<<endl<<"Seat is already Freed!"<<endl;
@@ -1215,7 +1298,7 @@ class Seat_management{
                         continue;
                     }
                
-                   seats[id][temp_seat-1]=0; // 1 for seat booked
+                   seats[id][date][temp_seat-1]=0; // 1 for seat booked
                    seat_no=0;
                    cout<<endl<<"Seat Cancelled successfully!"<<endl;
                    break;
@@ -1227,7 +1310,8 @@ class Seat_management{
         }
 };
 
-map<string,array<int,50>> Seat_management:: seats;
+// initilization of static map
+map<string,map<string,array<int,50>>> Seat_management:: seats;
 
 
 
@@ -1265,7 +1349,7 @@ class Booking:public User_authentication,public Seat_management{
                 
             } while (true);  
         }
-        void start_Booking(string id){
+        void start_Booking(string id,const Date &d1){
             cout<<"Login if you have an account.\nSignUp if you are new user\n"<<endl;
             int choice;
             bool checking_account=false;
@@ -1379,24 +1463,24 @@ class Booking:public User_authentication,public Seat_management{
                             else if (class_choice==1)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_economy_free_seats(id);
-                                    book_seat(class_choice,id);
+                                    show_economy_free_seats(id,d1);
+                                    book_seat(class_choice,id,d1);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
                             else if(class_choice==2)
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_buisness_free_seats(id);
-                                    book_seat(class_choice,id);
+                                    show_buisness_free_seats(id,d1);
+                                    book_seat(class_choice,id,d1);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
                             else
                                 {
                                     cout<<"Select Seat From selected class!\n"<<endl;
-                                    show_first_free_seats(id);
-                                    book_seat(class_choice,id);
+                                    show_first_free_seats(id,d1);
+                                    book_seat(class_choice,id,d1);
                                     seat_vector.push_back(*this);
                                     break;
                                 }
@@ -1484,7 +1568,7 @@ class Payment:public Booking{
                 return 0.0f;
             }      
         }
-        void general_payment_process(Search_flight &s1,string id){
+        void general_payment_process(Search_flight &s1,string id,const Date &d){
             do
             {
                 cout<<"\nDo you want to book this flight\n1.Yes\n2.No\n"<<endl;
@@ -1493,7 +1577,7 @@ class Payment:public Booking{
                 cin.ignore();
                 if (dec==1)
                 {
-                    Booking::start_Booking(id);
+                    Booking::start_Booking(id,d);
                     float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
                     cout<<"Your Total Bill is = "<<bill<<endl<<endl;
                     cout<<"Here is the list of Available Payment Currencies\n"<<endl;
@@ -1545,9 +1629,6 @@ class Payment:public Booking{
                         }else if (pay_m==3)
                         {
                             bank_account();
-                            cout<<"Enter amount of transaction = ";
-                            cin>>temp_money;
-                            cin.ignore();
                             do
                             {
                                cout<<"Enter amount of transaction = ";
@@ -1602,28 +1683,13 @@ class Payment:public Booking{
             cout<<"Enter Your Password = ";
             getline(cin,password);
         }
-    void new_full_Booking_process(){
-            do
-            {
-                s.input_flight_search_details();
-                cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
-                string id=s.show_flights();
-                if (id!="")
-                {
-                    general_payment_process(s,id);
-                    break;
-                }
-                
-            } while (true);
-    }
-    
 };
 vector<Payment> Payment::pay;
 // Final Receipt class
 
 class Reciept final :public Payment{
     public:
-        static void cancel_flight(string id)
+        static void cancel_flight(string id,const Date &d)
         {
             cout<<"Enter Your Cnic Number = ";
             long long int temp_cnic;
@@ -1656,7 +1722,7 @@ class Reciept final :public Payment{
                         {
                                 if (p.seat_no==c.return_seat_no())
                                 {
-                                p.cancel_seat(id);
+                                p.cancel_seat(id,d);
                                 break;
                                 }
                         }
@@ -1673,10 +1739,11 @@ class Reciept final :public Payment{
                 i++;
             }
         }
-        void generate_reciept(){
-            cout<<endl<<"Here is your Ticket Reciept:\n"<<endl;
-            s.show_flights();
-            float bill=Booking::fare_calculation(s.return_arrival_Country(),baggae);
+        void generate_reciept(Search_flight &s1){
+            cout<<endl;
+            cout<<"Here is your Ticket Reciept:\n"<<endl;
+            s1.show_flights();
+            float bill=Booking::fare_calculation(s1.return_arrival_Country(),baggae);
             cout<<"Total Paid amount is = "<<bill<<endl<<endl;
         }
 
@@ -1707,29 +1774,42 @@ int main()
             break;
         case 4:{
             Search_flight s1;
-            s1.input_flight_search_details();
+            Date temp_date=s1.input_flight_search_details();
             cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
             string id=s1.show_flights();
             Reciept p1;
-            p1.general_payment_process(s1,id);
-            p1.generate_reciept();
+            p1.general_payment_process(s1,id,temp_date);
+            cout<<endl;
+            p1.generate_reciept(s1);
             break;
         }
         case 5:{
-            Reciept r1;
-            r1.new_full_Booking_process();
+            Search_flight s1;
+            Date temp_date=s1.input_flight_search_details();
+            cout<<"\nHere are the Available Flights for date you Entered\n"<<endl;
+            string id=s1.show_flights();
+            Reciept p1;
+            p1.general_payment_process(s1,id,temp_date);
+            cout<<endl;
+            p1.generate_reciept(s1);
             break;
-            }
+        }
         case 6:{
+            char ch;
+            Date temp;
             cout<<"Enter Your Flight ID = ";
             string id;
             getline(cin,id);
-            Reciept::cancel_flight(id);
+            cout<<"Enter Your Flight Date(xx/yy/zzzz) = ";
+            cin>>temp.date>>ch>>temp.month>>temp.year;
+            Reciept::cancel_flight(id,temp);
+            cin.ignore();
             break;
             }
         case 7:
             start=false;
-        default:
+            break;
+            default:
             cout<<"You Entered Wrong Choice!\n"<<endl;
             break;
         }
