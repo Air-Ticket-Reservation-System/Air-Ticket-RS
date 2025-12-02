@@ -11,12 +11,7 @@
 using namespace std;
 
 //Global Function to get actual date
-string get_actual_date(){
-    auto now=chrono::system_clock::now();
-    time_t time=chrono::system_clock::to_time_t(now);
-    tm* local_date=localtime(&time);
-    return to_string(local_date->tm_mday)+to_string(local_date->tm_mon)+to_string(local_date->tm_year+1900);
-}
+
 class Person{
     protected:
         string first_name;
@@ -404,7 +399,7 @@ class Flights{
             {
                 if (lower_case=="uae")
                 {
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia" || lower_case_ai=="1")
                     {
                         string flight_id = "LHE-DXB-301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -424,7 +419,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia" || lower_case_ai=="2")
                     {
                         string flight_id = "LHE-SIA-201F";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -444,7 +439,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else if (lower_case_ai=="aia"){
+                    }else if (lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "LHE-AIA-101A";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
@@ -471,7 +466,7 @@ class Flights{
                     
                 }else if (lower_case=="saudi arabia")
                 {
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "LHE-KIA-409F";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -491,9 +486,9 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "LHE-AIA-1C01A";
+                        string flight_id = "LHE-FIA-1C01A";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
@@ -511,7 +506,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else {
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3") {
                         string flight_id = "LHE-AIA-30S1R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -530,11 +525,15 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }   
+                    } 
+                    else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
+                    }  
                 }
             }else{
                 if (lower_case=="uae"){
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia" || lower_case_ai=="1")
                     {
                         string flight_id = "LHE-DXB-30T1R";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -552,7 +551,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia"  || lower_case_ai=="2")
                     {
                         string flight_id = "LHE-SIA-20E1F";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -570,7 +569,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else{
+                    }else if(lower_case_ai=="aia"  || lower_case_ai=="3"){
                         string flight_id = "LHE-AIA-30Y1R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
@@ -587,9 +586,12 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
+                    }  
                 }else if(lower_case=="saudi arabia"){
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "LHE-KIA-12B09F";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -607,9 +609,9 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "LHE-SIA-A2701F";
+                        string flight_id = "LHE-FIA-A2701F";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
@@ -625,7 +627,7 @@ class Flights{
                         "Upgrade : Available"<<endl;
                         return flight_id;
 
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "LHE-AIA-BF301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -664,7 +666,7 @@ class Flights{
             {
                 if (lower_case=="uae")
                 {
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia" || lower_case_ai=="1")
                     {
                         string flight_id = "FIA-DXB-N3501R";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -683,7 +685,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia" || lower_case_ai=="2")
                     {
                         string flight_id = "FIA-SIA-2041FE";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -702,7 +704,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if (lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "FIA-AIA-1011AD";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
@@ -720,10 +722,13 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }    
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
+                    }   
                 }else if (lower_case=="saudi arabia")
                 {
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "FIA-KIA-2409GF";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -742,9 +747,9 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "FIA-SIA-320Q1F";
+                        string flight_id = "FIA-FIA-320Q1F";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
@@ -761,7 +766,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "FIA-AIA-V3301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -779,11 +784,14 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }   
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
+                    }
                 }     
             }else{
                 if (lower_case=="uae"){
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia"  || lower_case_ai=="1")
                     {
                         string flight_id = "FIA-DXB-W6301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -800,7 +808,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia" || lower_case_ai=="2")
                     {
                         string flight_id = "FIA-SIA-S201F";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -817,7 +825,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "FIA-AIA-M301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
@@ -833,11 +841,14 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
                     }
                 }
                 else if (lower_case=="saudi arabia")
                 {
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "FIA-KIA-12L09F";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -854,9 +865,9 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "FIA-SIA-27P01F";
+                        string flight_id = "FIA-FIA-27P01F";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
@@ -871,7 +882,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "FIA-AIA-F301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -908,7 +919,7 @@ class Flights{
             {
                 if (lower_case=="uae")
                 {
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia" || lower_case_ai=="1")
                     {
                         string flight_id = "ISB-DXB-3501RZ";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -927,7 +938,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia" || lower_case_ai=="2")
                     {
                         string flight_id = "ISB-SIA-2041FQ";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -946,7 +957,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "ISB-AIA-1011AO";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf3"<<endl<<
@@ -964,12 +975,13 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
                     }
-                    
-                    
                 }else if (lower_case=="saudi arabia")
                 {
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "ISB-KIA-2409F";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -988,9 +1000,9 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "ISB-SIA-K3201F";
+                        string flight_id = "ISB-FIA-K3201F";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : Return"<<endl<<
@@ -1007,7 +1019,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "ISB-AIA-D3301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -1025,14 +1037,15 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
                     }
                     
-                }
-                
-                
+                }        
             }else{
                 if (lower_case=="uae"){
-                    if (lower_case_ai=="dia")
+                    if (lower_case_ai=="dia" || lower_case_ai=="1")
                     {
                         string flight_id = "ISB-DXB-6301R0";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -1049,7 +1062,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="sia")
+                    }else if (lower_case_ai=="sia" || lower_case_ai=="2")
                     {
                         string flight_id = "ISB-SIA-X201F";
                        cout<<"flight_id : "<<flight_id<<endl<<
@@ -1066,7 +1079,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "ISB-AIA-J301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : New PIA"<<endl<<
@@ -1082,11 +1095,14 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
+                    }else{
+                        cout<<"You Entered wrong Details!"<<endl;
+                        return "";
                     }
                 }
                 else if (lower_case=="saudi arabia")
                 {
-                    if (lower_case_ai=="kia")
+                    if (lower_case_ai=="kia" || lower_case_ai=="1")
                     {
                         string flight_id = "ISB-KIA-1209F";
                         cout<<"flight_id : "<<flight_id<<endl<<
@@ -1103,9 +1119,9 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else if (lower_case_ai=="fia")
+                    }else if (lower_case_ai=="fia" || lower_case_ai=="2")
                     {
-                        string flight_id = "ISB-SIA-2701F";
+                        string flight_id = "ISB-FIA-2701F";
                        cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf12"<<endl<<
                         "type : One Way"<<endl<<
@@ -1120,7 +1136,7 @@ class Flights{
                         "Refund : Available"<<endl<<
                         "Upgrade : Available"<<endl;
                         return flight_id;
-                    }else{
+                    }else if(lower_case_ai=="aia" || lower_case_ai=="3"){
                         string flight_id = "ISB-AIA-F301R";
                         cout<<"flight_id : "<<flight_id<<endl<<
                         "flight_name : PIA Gulf13"<<endl<<
@@ -1154,18 +1170,26 @@ struct Date
 bool check_valid_date(const Date &d){
     if ((d.year==2025 ||d.year==2026) && d.date<=31 && d.month<=12 &&d.date>=1 && d.month>=1)
     {
-        string temp_d=d.date<10?"0"+to_string(d.date):to_string(d.date);
-        string temp_m=d.month<10?"0"+to_string(d.month):to_string(d.month);
-        string final_date=temp_d+temp_m+to_string(d.year);
-        int int_date=stoi(final_date);
-        if (int_date>=stoi(get_actual_date()))
-    {
-        return true;
+        auto now=chrono::system_clock::now();
+        time_t time=chrono::system_clock::to_time_t(now);
+        tm* local_date=localtime(&time);
+        int temp_date=local_date->tm_mday;
+        int temp_month=local_date->tm_mon+1;
+        
+        if (d.month>=temp_month)
+            {
+                if (temp_month==d.month)
+                {
+                    if (d.date>=temp_date)
+                    {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                return true;    
+            }
     }
-    }else{
-        return false;
-    }
-    
     return false;
 }
 
@@ -1224,10 +1248,26 @@ class Search_flight:public Flights{
                     cout<<endl<<"You Entered Wrong Details!"<<endl;
                 }
             } while (!check);
-            cout<<"\nEnter Arrival Airport(XYZ) = ";
-            string temp_airport;
-            getline(cin,temp_airport);
-            arrival_airport=toLower(temp_airport);
+            do
+            {
+                cout<<"\nEnter Arrival Airport(XYZ) = ";
+                string temp_airport;
+                getline(cin,temp_airport);
+                temp_airport=toLower(temp_airport);
+                if (temp_airport=="dia" ||temp_airport=="sia" ||
+                temp_airport=="aia" ||temp_airport=="fia" ||temp_airport=="kia" ||
+                temp_airport=="1" ||temp_airport=="2" ||temp_airport=="3")
+                {
+                    arrival_airport=toLower(temp_airport);
+                    break;
+                }
+                cout<<endl;
+                cout<<"Please Enter Valid input!\n"<<endl;
+                
+            } while (true);
+            
+            
+            
             int choice;
             do
             {
