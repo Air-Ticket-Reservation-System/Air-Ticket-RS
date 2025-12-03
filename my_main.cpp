@@ -10,7 +10,6 @@
 #define SA_PRICE 150000
 using namespace std;
 
-//Global Function to get actual date
 
 class Person{
     protected:
@@ -18,11 +17,49 @@ class Person{
         string last_name;
         long long int phone_number,passport,cnic;
     public:
+        bool check_valid_name(string name){
+            string special_char="`~!@#$%^&*)(-_><,[]{}\"?:;";
+            int i=0;
+            for (auto &ch:name)
+            {
+                if (isdigit(ch))
+                {
+                   return false;
+                }
+                for (auto &j:special_char)
+                {
+                    if (ch==j)
+                    {
+                        return false;
+                    }
+                    
+                }
+            }
+            return true;
+        }
         void person_input(){
-            cout<<"Enter First name = ";
-            getline(cin,first_name);
-            cout<<"Enter Last name = ";
-            getline(cin,last_name);
+            do
+            {
+                cout<<"Enter First name = ";
+                getline(cin,first_name);
+                if (check_valid_name(first_name)==false)
+                {
+                    cout<<endl;
+                    cout<<"Numbers and special characters are not allowed!\n"<<endl;
+                    continue;
+                }
+                
+                cout<<"Enter Last name = ";
+                getline(cin,last_name);
+                if (check_valid_name(last_name)==false)
+                {
+                    cout<<endl;
+                    cout<<"Numbers and special characters are not allowed!\n"<<endl;
+                    continue;
+                }
+                break;
+            } while (true);
+            
             do
             {
                 cout<<"Enter CNIC = ";
@@ -1751,7 +1788,7 @@ class Payment:public Booking{
                     return false;
                 }
         }
-        float currency_convertor(float money,int n){
+        double currency_convertor(double money,int n){
             switch (n)
             {
             case 1:
