@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <algorithm>
 #include <map>
 #include <ctime>
 #include <array>
@@ -10,14 +11,7 @@
 #define SA_PRICE 150000
 using namespace std;
 
-
-class Person{
-    protected:
-        string first_name;
-        string last_name;
-        long long int phone_number,passport,cnic;
-    public:
-        bool check_valid_name(string name){
+bool check_valid_name(string name){
             string special_char="`~!@#$%^&*)(-_><,[]{}\"?:;";
             int i=0;
             for (auto &ch:name)
@@ -36,7 +30,14 @@ class Person{
                 }
             }
             return true;
-        }
+    }
+
+class Person{
+    protected:
+        string first_name;
+        string last_name;
+        long long int phone_number,passport,cnic;
+    public:   
         void person_input(){
             do
             {
@@ -182,7 +183,8 @@ class User_authentication:public Person{
                 {
                     if (u.email==temp_mail && u.password==temp_password)
                         {
-                            cout<<"Login successful"<<endl;
+                            cout<<endl;
+                            cout<<"Login successful\n"<<endl;
                             return 0;
                         }
                 }
@@ -203,6 +205,7 @@ class User_authentication:public Person{
                             cout<<"\nHere are your details:\n"<<endl;
                             cout<<"Your first name = "<<u.first_name<<endl;
                             cout<<"Your last name = "<<u.last_name<<endl;
+                            cout<<"Your CNIC = "<<u.cnic<<endl;
                             cout<<"Your phone number = "<<u.phone_number<<endl;
                             cout<<"Your email = "<<u.email<<endl;
                             cout<<"Your Password = "<<u.password<<endl;
@@ -232,9 +235,24 @@ class User_authentication:public Person{
                             getline(cin,u.last_name);
                             cout<<"Enter your phone number = ";
                             cin>>u.phone_number;
+                            if (!cin)
+                                {
+                                    cin.clear();
+                                    cin.ignore(1000,'\n');
+                                    cout<<"Enter valid Phone Number Try Again!"<<endl;
+                                    continue;
+                                }
                             cin.ignore();
-                            cout<<"Enter your email = ";
-                            getline(cin,email);
+                            cout<<"Enter your CNIC = ";
+                            cin>>u.cnic;
+                            if (!cin)
+                                {
+                                    cin.clear();
+                                    cin.ignore(1000,'\n');
+                                    cout<<"Enter valid CNIC Try Again!"<<endl;
+                                    continue;
+                                }
+                            cin.ignore();
                             cout<<"Set your password according to criteria\n"
                             "Password must have at least 8 characters\n"
                             "password must have one upercase,lowercase,digit\n"
@@ -247,29 +265,29 @@ class User_authentication:public Person{
                                 bool digit_check=false;
                                 bool special_char_check=false;
                                 cout<<endl;
-                                cout<<"Enter your password = ";
-                                getline(cin,password);
-                                int len=password.length();
+                                cout<<"Enter your new password = ";
+                                getline(cin,u.password);
+                                int len=u.password.length();
                                 if (len>=8)
                                 {
                                     for (size_t i = 0; i < len; i++)
                                     {
-                                        if (isupper(password[i]))
+                                        if (isupper(u.password[i]))
                                             {
                                                 upper_case_check=true;
                                                 
                                             }
-                                        else if (islower(password[i]))
+                                        else if (islower(u.password[i]))
                                             {
                                                 lower_case_check=true;
                                                 
                                             }
-                                        else if (isdigit(password[i]))
+                                        else if (isdigit(u.password[i]))
                                             {
                                                 digit_check=true;
                                                 
                                             }
-                                        else if (ispunct(password[i]))
+                                        else if (ispunct(u.password[i]))
                                             {
                                                 special_char_check=true;
                                                 
@@ -304,13 +322,14 @@ class User_authentication:public Person{
         }
         void forgot_password(){
             string temp_mail,temp_password;
-            cout<<"Enter your email = ";
-            getline(cin,temp_mail);
+            bool ph_n=false;
             do
             {
+                cout<<"Enter your email = ";
+                getline(cin,temp_mail);
                long int phone_n;
                cout<<"Enter Phone Number = ";
-                cin>>phone_number;
+                cin>>phone_n;
                 if (!cin)
                     {
                         cin.clear();
@@ -318,17 +337,42 @@ class User_authentication:public Person{
                         cout<<"Enter valid Phone Number!"<<endl;
                         continue;
                     }
-                cin.ignore();
+                cin.ignore();   
+                for (auto &u:user)
+                {
+                    if (phone_n==u.phone_number && temp_mail==u.email)
+                    {
+                        ph_n=true;
+                        break;
+                    }
+                    
+                }
+                if (!ph_n)
+                {
+                    cout<<endl;
+                    cout<<"Phone number or email does not exist in Database!\n"<<endl;
+                    return;
+                }    
                 break;
             } while (true);
-            cout<<"Enter 4-Digit pin code sent on Phone Number = ";
-            getline(cin,temp_password);
+
+            do
+            {
+                cout<<"Enter 4-Digit code sent to your Phone Number = ";
+                getline(cin,temp_password);
+                if (temp_password.length()==4)
+                {
+                    break;
+                }
+                cout<<endl;
+                cout<<"Password must have 4 digits!\n"<<endl;
+            } while (true);
+            
             for (auto &u:user)
             {
                 if (u.email==temp_mail)
                 {
                     cout<<endl;
-                    cout<<"Enter New Password\n"<<endl;
                     cout<<"Set your password according to criteria\n"
                             "Password must have at least 8 characters\n"
                             "password must have one upercase,lowercase,digit\n"
@@ -341,7 +385,7 @@ class User_authentication:public Person{
                                 bool digit_check=false;
                                 bool special_char_check=false;
                                 cout<<endl;
-                                cout<<"Enter your password = ";
+                                cout<<"Enter New Password = ";
                                 getline(cin,u.password);
                                 int len=u.password.length();
                                 if (len>=8)
@@ -389,12 +433,8 @@ class User_authentication:public Person{
                                     } 
                             } while (!overall_check);
                     
-                }else{
-                    cout<<"Credentials did not match!"<<endl;
                 }
-                
             }
-            
         }
 };
 vector<User_authentication> User_authentication::user;
@@ -1366,6 +1406,7 @@ class Seat_management{
     protected:
         int seat_no;
         public:
+        vector <int> booked_seat;
         static map<string,map<string,array<int,50>>> seats;
 
         static string convert_date_to_string(const Date &d1){
@@ -1498,6 +1539,7 @@ class Seat_management{
                     {
                     seats[id][date][seat_choice-1]=1; // 1 for seat booked
                     seat_no=seat_choice;
+                    booked_seat.push_back(seat_no);
                     cout<<endl<<"Seat selected successfully!"<<endl;
                     break;
                     }else{
@@ -1525,14 +1567,15 @@ class Seat_management{
                         cout<<endl<<"Seat is already Freed!"<<endl;
                         continue;
                     }
-                if (temp_seat!=seat_no)
+                auto it=find(booked_seat.begin(),booked_seat.end(),temp_seat);
+                if (it==booked_seat.end())
                     {
                         cout<<endl<<"This is not your seat!"<<endl;
                         continue;
                     }
                
                    seats[id][date][temp_seat-1]=0; // 1 for seat booked
-                   seat_no=0;
+                   booked_seat.erase(it);
                    cout<<endl<<"Seat Cancelled successfully!"<<endl;
                    break;
                 
@@ -1557,7 +1600,7 @@ class Booking:public User_authentication,public Seat_management{
         string flight_class;
         float fare;
         float baggae;
-        static vector<Person> person_vector;
+        vector<Person> person_vector;
         static vector<Seat_management> seat_vector;
     public:
         float fare_calculation(string c,float weight){
@@ -1618,6 +1661,13 @@ class Booking:public User_authentication,public Seat_management{
                 cout<<"Enter number of Passengers (at one time maximum limit 5) = ";
                 cin>>no_of_passengers;
                 cin.ignore();
+                if (!cin)
+                        {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                        }
                 if (no_of_passengers>0 &&no_of_passengers<=5)
                 {
                     do
@@ -1639,6 +1689,13 @@ class Booking:public User_authentication,public Seat_management{
                         }
                         cout<<"How many childs = ";
                         cin>>child;
+                        if (!cin)
+                        {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                        }
                         cin.ignore();
                         if(sum+child<=no_of_passengers){
                                 if (adult>0)
@@ -1659,6 +1716,13 @@ class Booking:public User_authentication,public Seat_management{
                         }
                         cout<<"How many infants = ";
                         cin>>infant;
+                        if (!cin)
+                        {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                        }
                         cin.ignore();
                         if(sum+infant<=no_of_passengers){
                                 if (adult>0)
@@ -1688,6 +1752,13 @@ class Booking:public User_authentication,public Seat_management{
                             "2.Business\n3.First Class"<<endl;
                             int class_choice;
                             cin>>class_choice;
+                            if (!cin)
+                            {
+                                cin.clear();
+                                cin.ignore(1000,'\n');
+                                cout<<"Enter valid Input!"<<endl;
+                                continue;
+                            }
                             cin.ignore();
                             if (class_choice<0 || class_choice>3)
                             {
@@ -1725,6 +1796,13 @@ class Booking:public User_authentication,public Seat_management{
                             cout<<"Enter weight of your Baggage = ";
                             float temp_weight;
                             cin>>temp_weight;
+                            if (!cin)
+                            {
+                            cin.clear();
+                            cin.ignore(1000,'\n');
+                            cout<<"Enter valid Input!"<<endl;
+                            continue;
+                            }
                             cin.ignore();
                             if(temp_weight>=0 && temp_weight<=20){
                                 baggae=temp_weight;
@@ -1750,7 +1828,6 @@ class Booking:public User_authentication,public Seat_management{
 };
 
 //Initiliztion of static vectors
-vector<Person> Booking::person_vector;
 vector<Seat_management> Booking::seat_vector;
 
 // Payment class 
@@ -1846,6 +1923,13 @@ class Payment:public Booking{
                         cout<<"Enter Payment method = ";
                         int pay_m;
                         cin>>pay_m;
+                        if (!cin)
+                        {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                        }
                         cin.ignore();
                         float temp_money;
                         if(pay_m==1 || pay_m==2){// same method for both
@@ -1854,6 +1938,13 @@ class Payment:public Booking{
                             {
                                cout<<"Enter amount of transaction = ";
                                 cin>>temp_money;
+                                if (!cin)
+                                {
+                                cin.clear();
+                                cin.ignore(1000,'\n');
+                                cout<<"Enter valid Input!"<<endl;
+                                continue;
+                                }
                                 cin.ignore();
                                 pay_money=currency_convertor(temp_money,choice);
                                 bool pay_check=payment_checker(pay_money,total_fare);
@@ -1870,6 +1961,13 @@ class Payment:public Booking{
                             {
                                cout<<"Enter amount of transaction = ";
                                 cin>>temp_money;
+                                if (!cin)
+                                {
+                                cin.clear();
+                                cin.ignore(1000,'\n');
+                                cout<<"Enter valid Input!"<<endl;
+                                continue;
+                                }
                                 cin.ignore();
                                 pay_money=currency_convertor(temp_money,choice);
                                 bool pay_check=payment_checker(pay_money,total_fare);
@@ -1948,8 +2046,7 @@ class Reciept final :public Payment{
             for (auto &p:pay)
             {
                 if(p.cnic==temp_cnic){
-                    cout<<"\nHere are your Ticket Details:\n"<<endl;
-                    //show function
+                    cout<<endl;
                     cout<<"\nYou want to cancel flight\n"<<
                     "1.yes\n2.No"<<endl;
                     int c_choice;
@@ -1957,6 +2054,13 @@ class Reciept final :public Payment{
                         {
                             cout<<"Enter your choice = ";
                             cin>>c_choice;
+                            if (!cin)
+                            {
+                            cin.clear();
+                            cin.ignore(1000,'\n');
+                            cout<<"Enter valid Input!"<<endl;
+                            continue;
+                            }
                             cin.ignore();
                             if (c_choice==1 || c_choice==2)
                             {
@@ -1969,7 +2073,8 @@ class Reciept final :public Payment{
                         {
                         for (auto &c:Booking::seat_vector)
                         {
-                                if (p.seat_no==c.return_seat_no())
+                                if (find(c.booked_seat.begin(), c.booked_seat.end(), p.seat_no)
+                                 != c.booked_seat.end())
                                 {
                                 p.cancel_seat(id,d);
                                 break;
@@ -2085,9 +2190,16 @@ int main()
                 cout<<"Enter Your Flight Date(xx/yy/zzzz) = ";
                 cin>>temp.date>>ch>>temp.month>>ch>>temp.year;
                 cin.ignore();
-                if ((temp.year==2025 ||temp.year==2026) && temp.month>=11)
+                if (temp.year==2025 ||temp.year==2026)
                 {
-                    break;
+                    if (temp.year==2025 && temp.month>=12 &&(temp.date>0 && temp.date<=31) )
+                    {
+                        break;
+                    }
+                    else if (temp.year==2026 && temp.month > 0 &&(temp.date>0 && temp.date<=31) )
+                    {
+                        break;
+                    }
                 }else{
                     cout<<endl;
                     cout<<"Please input valid Date!"<<endl;
