@@ -233,25 +233,19 @@ class User_authentication:public Person{
                             getline(cin,u.first_name);
                             cout<<"Enter your last name = ";
                             getline(cin,u.last_name);
-                            cout<<"Enter your phone number = ";
-                            cin>>u.phone_number;
-                            if (!cin)
-                                {
-                                    cin.clear();
-                                    cin.ignore(1000,'\n');
-                                    cout<<"Enter valid Phone Number Try Again!"<<endl;
-                                    continue;
-                                }
-                            cin.ignore();
-                            cout<<"Enter your CNIC = ";
-                            cin>>u.cnic;
-                            if (!cin)
-                                {
-                                    cin.clear();
-                                    cin.ignore(1000,'\n');
-                                    cout<<"Enter valid CNIC Try Again!"<<endl;
-                                    continue;
-                                }
+                            do
+                            {
+                                cout<<"Enter your phone number = ";
+                                cin>>u.phone_number;
+                                if (!cin)
+                                    {
+                                        cin.clear();
+                                        cin.ignore(1000,'\n');
+                                        cout<<"Enter valid Phone Number Try Again!"<<endl;
+                                        continue;
+                                    }
+                                    break;
+                            } while (true);
                             cin.ignore();
                             cout<<"Set your password according to criteria\n"
                             "Password must have at least 8 characters\n"
@@ -2037,11 +2031,24 @@ class Reciept final :public Payment{
     public:
         static void cancel_flight(string id,const Date &d)
         {
-            bool cancel=false;
-            cout<<"Enter Your Cnic Number = ";
             long long int temp_cnic;
-            cin>>temp_cnic;
-            // cin.ignore();
+            bool cancel=false;
+            do
+            {
+                cout<<"Enter Your Cnic Number = ";
+                cin>>temp_cnic;
+                if (!cin)
+                {
+                cin.clear();
+                cin.ignore(1000,'\n');
+                cout<<"Enter valid Input!"<<endl;
+                continue;
+                }
+                cin.ignore();
+                break;
+            } while (true);
+            
+            
             int i=0;
             for (auto &p:pay)
             {
@@ -2189,6 +2196,13 @@ int main()
             {
                 cout<<"Enter Your Flight Date(xx/yy/zzzz) = ";
                 cin>>temp.date>>ch>>temp.month>>ch>>temp.year;
+                if (!cin)
+                    {
+                    cin.clear();
+                    cin.ignore(1000,'\n');
+                    cout<<"Enter valid Input!"<<endl;
+                    continue;
+                    }
                 cin.ignore();
                 if (temp.year==2025 ||temp.year==2026)
                 {
