@@ -348,7 +348,8 @@ class User_authentication:public Person{
                     return;
                 }    
                 break;
-            } while (true);
+            } 
+            while (true);
 
             do
             {
@@ -384,7 +385,7 @@ class User_authentication:public Person{
                                 int len=u.password.length();
                                 if (len>=8)
                                 {
-                                    for (size_t i = 0; i < len; i++)
+                                    for (int i = 0; i < len; i++)
                                     {
                                         if (isupper(u.password[i]))
                                             {
@@ -425,7 +426,8 @@ class User_authentication:public Person{
                                     {
                                         cout<<"Password must have atleast 8 characters long!\n";
                                     } 
-                            } while (!overall_check);
+                            }
+                             while (!overall_check);
                     
                 }
             }
