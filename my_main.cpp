@@ -229,10 +229,28 @@ class User_authentication:public Person{
                 {
                     if (u.email==temp_mail && u.password==temp_password)
                         {
-                            cout<<"Enter your first name = ";
-                            getline(cin,u.first_name);
-                            cout<<"Enter your last name = ";
-                            getline(cin,u.last_name);
+                            do
+                            {
+                                cout<<"Enter your first name = ";
+                                getline(cin,u.first_name);
+                                if (check_valid_name(u.first_name)==false)
+                                {
+                                    cout<<endl;
+                                    cout<<"Numbers and special characters are not allowed!\n"<<endl;
+                                    continue;
+                                }
+                                cout<<"Enter your last name = ";
+                                getline(cin,u.last_name);
+                                if (check_valid_name(u.last_name)==false)
+                                {
+                                    cout<<endl;
+                                    cout<<"Numbers and special characters are not allowed!\n"<<endl;
+                                    continue;
+                                }
+                                break;
+                            } while (true);
+                            
+                            
                             do
                             {
                                 cout<<"Enter your phone number = ";
