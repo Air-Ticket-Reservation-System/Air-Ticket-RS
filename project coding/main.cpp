@@ -261,7 +261,7 @@ class user_authentication:public person{  // class have function for signup , lo
             }
             if(!find){
                    cout<<"Email or password does not match with user credentials!"<<endl;
-                }
+            }
         }
         void forgot_password(){
             string temp_mail,temp_password;
