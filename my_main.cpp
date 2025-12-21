@@ -1305,6 +1305,13 @@ class Search_flight:public Flights{
             {
                 cout<<"Select Departure Airport(1,2,3) = ";
                 cin>>dept_airport;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                    }
                 cin.ignore();
                 if (dept_airport==1 || dept_airport==2 || dept_airport==3)
                 {
@@ -1362,6 +1369,13 @@ class Search_flight:public Flights{
             {
                 cout<<"\nSelect Flight Type:\n1.OneWay\n2.Return"<<endl;
                 cin>>choice;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                    }
                 cin.ignore();
                 if (choice==1)
                 {
@@ -1381,6 +1395,13 @@ class Search_flight:public Flights{
                 cout<<"Enter Departure Date (x/y/z) = ";
                 char ch;
                 cin>>d.date>>ch>>d.month>>ch>>d.year;
+                if (!cin)
+                    {
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+                        cout<<"Enter valid Input!"<<endl;
+                        continue;
+                    }
                 cin.ignore();
                 if (check_valid_date(d))
                 {
