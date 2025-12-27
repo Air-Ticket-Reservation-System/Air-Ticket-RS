@@ -1870,7 +1870,7 @@ class Payment:public Booking{
     friend Reciept;
     protected:
         float pay_money;
-        map <string,int> rates;
+        map <string,float> rates;
         public:
         static vector<Payment> pay;
         Search_flight s;
@@ -1921,6 +1921,13 @@ class Payment:public Booking{
                 cout<<"\nDo you want to book this flight\n1.Yes\n2.No\n"<<endl;
                 int dec;
                 cin>>dec;
+                if (!cin)
+                {
+                cin.clear();
+                cin.ignore(1000,'\n');
+                cout<<"Enter valid Input!"<<endl;
+                continue;
+                }
                 cin.ignore();
                 if (dec==1)
                 {
