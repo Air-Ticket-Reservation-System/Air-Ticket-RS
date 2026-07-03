@@ -28,7 +28,6 @@ A full-stack Air Ticket Reservation System built with a vanilla HTML/CSS/JavaScr
 - MySQL
 - mysql2 (MySQL driver for Node.js)
 - dotenv
-- CORS
 
 ## 📦 Installation
 
