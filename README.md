@@ -56,7 +56,7 @@ A full-stack Air Ticket Reservation System built with a vanilla HTML/CSS/JavaScr
    DB_PORT=3306
    DB_USER=root
    DB_PASSWORD=
-   DB_DATABASE=air_ticket_db
+   DB_DATABASE=ars
    PORT=3000
    ```
 
